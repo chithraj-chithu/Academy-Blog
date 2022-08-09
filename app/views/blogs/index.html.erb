@@ -1,0 +1,179 @@
+<div style="background-color: white">
+<% @blogs.each do |blog|%>
+   <%= blog.blog %> 
+   <% if blog.images.attached? %>
+      <% blog.images.each do |image|%>
+        <%= image_tag(image,style: "height: 30px;width: 30px")%>
+      <% end %>
+   <% end %>
+   <% @blog_creator = User.find(blog.user_id)%>
+   <%= @blog_creator.first_name %>
+   <%= blog.created_at.strftime("%d/%m/%Y at %I:%M %p") %>
+   <% if @presence == 1%>
+   <% if blog.user_id == @current_user.id%>
+   <%= form_with(url: "/blogs/#{blog.id}", method: "delete") do|form| %>
+   <%= form.submit "Delete blog"%>
+    <% end %>
+    <% end %>
+    <% @blog_reaction_value = BlogReaction.where(blog_id: blog.id)%>
+    <% if @blog_reaction_value == []%>
+    <div>
+    <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
+    <input type="hidden" name="reaction" value=1>
+    <%= form.submit "Like"%>
+    </div>
+    <% end %>
+    <div>
+    <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
+    <input type="hidden" name="reaction" value=0>
+    <%= form.submit "DisLike"%>
+    </div>
+    <% end %>
+    <% elsif @blog_reaction_value != []%>
+     <% @like = 0%>
+     <% @dislike = 0%>
+     <% @user_presence = 0%>
+     <% @reaction_boolean = nil %>
+      <% @blog_reaction_value.each do |reaction| %>
+        <% if reaction.reaction == "1"%>
+           <% @like = @like + 1%>
+         <% elsif reaction.reaction == "0"%>
+           <% @dislike = @dislike + 1%>
+        <% end %>
+     
+       <% end %>
+       <% @blog_reaction_value.each do |reaction| %>
+        <% if reaction.user_id == @current_user.id%>
+            <%@user_presence = 1%>
+            <%@reaction_boolean =reaction.reaction %>
+            <% @reaction_value = reaction.id %>
+            <% break %>
+        <% else%>
+           <%@user_presence = 0%>
+        <% end %>
+       <% end %>
+       <% if @user_presence == 0 %>
+          <div>
+           <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
+                 <input type="hidden" name="reaction" value=1>
+                 <%= form.submit "Like"%>
+            </div>
+           <% end %>
+           <div>
+         <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
+              <input type="hidden" name="reaction" value=0>
+              <%= form.submit "DisLike"%>
+           </div>
+         <% end %>
+       <% elsif @user_presence == 1 %>
+          <% if @reaction_boolean == "0"%>
+          <div>
+            <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "put") do|form| %>
+             <input type="hidden" name="reaction" value=1>
+             <p style='cursor:pointer; color : <%= @reaction_boolean=="1" ? 'blue;' : 'black;' %>'>Like </p>
+             <%= form.submit "Submit"%>
+            <% end %>
+            </div>
+          <%=@like%>
+         <div>
+         <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "delete") do|form| %>
+         <input type="hidden" name="reaction" value=0>
+         <p style='cursor: pointer; color : <%= @reaction_boolean=="0" ? 'blue;' : 'black;' %>'>Dislike </p>
+         <%= form.submit "Submit" %>
+        <% end %>
+        </div>
+         <%=@dislike%>
+          <% elsif @reaction_boolean == "1"%>
+           <div>
+            <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "delete") do|form| %>
+             <input type="hidden" name="reaction" value=1>
+             <p style='cursor:pointer; color : <%= @reaction_boolean=="1" ? 'blue;' : 'black;' %>'>Like </p>
+             <%= form.submit "Submit"%>
+            <% end %>
+            </div>
+          <%=@like%>
+         <div>
+         <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "put") do|form| %>
+         <input type="hidden" name="reaction" value=0>
+         <p style='cursor: pointer; color : <%= @reaction_boolean=="0" ? 'blue;' : 'black;' %>'>Dislike </p>
+         <%= form.submit "Submit" %>
+        <% end %>
+        </div>
+         <%=@dislike%>
+          <% end %>
+         <% end %>
+       <% end %>
+       <% end %>
+   <%@count += 1%>
+   <%= button_tag 'Comments', type: 'button',onclick: "showHideForm('show#{@count}')" %>
+   
+   <div id="show<%= @count %>" style="display: none;">
+   <% @comments_of_current_blog = blog.comments%>
+   <% if @comments_of_current_blog == []%>
+      No comments yet
+      <% if @presence==1%>
+      <%= form_with(url: "/comments/#{blog.id}", method: "post") do|form| %>
+ 
+    <%= form.text_area "comment[comment]",class: "",placeholder: "Add comment"%>
+    <%= form.file_field "comment[images]",multiple: true,class: ""%>
+    <%= form.submit "Continue"%>
+    <% end %>
+    <% end %>
+    <% else %>
+   <% @comments_of_current_blog.each do |comment|%>
+    <% @comment_creator = User.find(comment.user_id)%>
+    <%= @comment_creator.first_name %>
+    <%= comment.comment %>
+    <%= comment.created_at.strftime("%d/%m/%Y at %I:%M %p") %>
+    <% if comment.images.attached? %>
+      <% comment.images.each do |image|%>
+        <%= image_tag(image,style: "height: 30px;width: 30px")%>
+      <% end %>
+   <% end %>
+   <% if presence == 1%>
+   <% if comment.user_id == @current_user.id%>
+   <%= form_with(url: "/comments/#{comment.id}", method: "delete") do|form| %>
+   <%= form.submit "Delete comment"%>
+    <% end %>
+    <% end %>
+    <% end %>
+   <br>
+   <% end %>
+   <% if @presence==1%>
+   <%= form_with(url: "/comments/#{blog.id}", method: "post") do|form| %>
+ 
+    <%= form.text_area "comment[comment]",class: "",placeholder: "Add comment"%>
+    <%= form.file_field "comment[images]",multiple: true,class: ""%>
+    <%= form.submit "Continue"%>
+    <% end %>
+
+     <% elsif %>
+       <a href="/signin">Login here to add comments</a>
+    <% end %>
+    
+    <% end %>
+   </div>
+   <br>
+<% end %>
+<% if @presence == 1%>
+   
+   <%= form_with(url: "/blogs", method: "post") do|form| %>
+ 
+    <%= form.text_area "blog[blog]",class: "",placeholder: "Add your blog here"%>
+    <%= form.file_field "blog[images]",multiple: true,class: ""%>
+    <%= form.submit "Continue"%>
+    
+    <% end %>
+<% end %>
+</div>
+<script>
+  function showHideForm(div_id){
+    div = document.getElementById(div_id);
+    if(div.style.display == "none"){
+        div.style.display = "block"
+    }
+    else {
+        div.style.display = "none"
+    }
+  }
+</script>

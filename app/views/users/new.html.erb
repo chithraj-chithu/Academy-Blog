@@ -1,0 +1,66 @@
+<style>
+    body {
+        background-color: #051B2A;
+        /* background-attachment: fixed; */
+        background-size: 100%;
+        background-blend-mode: soft-light;
+        background-repeat: no-repeat;
+        /* overflow :hidden; */
+    }
+</style>
+
+
+<main class="signup_body">
+    <form action="/users" method="post" enctype="multipart/form-data">
+        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+        <% if flash[:error]%>
+            <p class="signup_flash_error">
+                <%= flash[:error]%>
+            </p>
+            <%end%>
+                <%= image_tag 'fluid.png' , alt: 'icon' , class: "fluid" %>
+
+                    <%= image_tag 'fluid.png' , alt: 'icon' , class: "fluid1" %>
+
+                        <!-- <%= image_tag 'man.png' , alt: 'icon' , class: "man" %> -->
+
+                        <div class="regester_container">
+
+                            <div class="signup_account_title_div">
+                                <p class="signup_account_title">
+                                    Create Your FWSA account
+                                </p>
+                            </div>
+                            <div class="signup_firstname_div">
+                                <div class="signup_firstname_div1">
+                                    <!-- <input placeholder="First name" type="text" class="signup_firstname" id="first_name"
+                                    name="user[first_name]"> -->
+                                </div>
+                            </div>
+                        </div>
+                        <input placeholder="First name" type="text" class="signup_firstname" id="first_name"
+                        name="user[first_name]">
+                        <div>
+                            <%= image_tag 'boy.png' , alt: 'icon' , class: "man" %>
+                        </div>
+                        <p class="signup_text2">Have an account?</p>
+                        <a href="/signin" class="signup_signin">
+                            Sign in
+                        </a>
+
+                        <br>
+                        <input placeholder="Last name" type="text" class="signup_fullname" id="last_name"
+                            name="user[last_name]">
+                        <br>
+                        <input placeholder="Mail ID" type="email" class="signup_email" id="email" name="user[email]">
+                        <br>
+                        <input placeholder="Password" type="password" class="signup_password" id="password"
+                            name="user[password]">
+                        <br>
+                        <input placeholder="Confirm Password" type="password" class="signup_password"
+                            id="confirm_password" name="user[password_confirmation]">
+                        <br>
+                        <input type="file" id="avatar" name="user[profile_picture]">
+                        <button type="submit" class="signup_create_button">Sign up</button>
+    </form>
+</main>
