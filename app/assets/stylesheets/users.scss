@@ -4,9 +4,7 @@
 
 //registration page
 
-
-@import url('https://fonts.googleapis.com/css2?family=Acme&family=Arima+Madurai:wght@700&family=Arima:wght@500&family=Capriola&family=Kenia&family=Langar&family=Merienda:wght@400;700&family=Mogra&family=Oleo+Script+Swash+Caps&family=Permanent+Marker&family=Righteous&family=Sacramento&family=Satisfy&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Arima+Madurai:wght@700&family=Arima:wght@500&family=Capriola&family=Kenia&family=Langar&family=Merienda:wght@400;700&family=Mogra&family=Oleo+Script+Swash+Caps&family=Permanent+Marker&family=Righteous&family=Sacramento&family=Satisfy&display=swap");
 
 .fluid {
   height: 20%;
@@ -16,12 +14,12 @@
   object-fit: cover;
   top: -28%;
   left: -13%;
-  animation: float1 5s ease-out infinite;
+  animation: float1 8s ease-out infinite;
 }
-@keyframes float1{
-    50%{
-        transform: translateY(-60px);
-    }
+@keyframes float1 {
+  50% {
+    transform: translateY(-60px);
+  }
 }
 
 .fluid1 {
@@ -31,90 +29,120 @@
   top: 43%;
   object-fit: cover;
   left: 21%;
-  animation: float 5s ease-out infinite;
+  animation: float 8s ease-out infinite;
 }
 
-@keyframes float{
-    50%{
-        transform: translateY(60px);
-    }
+@keyframes float {
+  50% {
+    transform: translateY(60px);
+  }
 }
 
 .regester_container {
   position: relative;
   height: 81%;
-    width: 82%;
+  width: 82%;
   border-radius: 63px;
   display: flex;
   background: rgba(255, 255, 255, 0.25);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
-//   border-radius: 10px;
+  //   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   top: -78%;
-    left: 10%;
+  left: 10%;
 }
 
-.man{
-    position: absolute;
-    top: 17%;
-    left: 59%;
-    z-index: 999;
-    height: 65%;
+.man {
+  position: absolute;
+  top: 17%;
+  left: 59%;
+  z-index: 999;
+  height: 65%;
 }
 
-.signup_account_title_div{
+.signup_account_title_div {
+  position: relative;
+  /* background: black; */
+  height: 11%;
+  width: 50%;
+  top: 10%;
+  left: 6%;
+}
+
+.signup_account_title {
+  font-family: "Kenia", cursive;
+  color: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+.signup_firstname_div {
+position: relative;
+  background-color: black;  height: 20%;
+  height: 9%;
+  top: 27%;
+  width: 24%;
+  right: 38%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+// .signup_firstname_div1{
+//     // background-color: black;
+//     height: 76%;
+//     position: relative;
+//     top: 11%;
+//     width: 92%;
+//     left: 3.5%;
+//     background: rgba( 255, 255, 255, 0.15 );
+// box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+// backdrop-filter: blur( 3px );
+// -webkit-backdrop-filter: blur( 3px );
+// border-radius: 10px;
+// border: 1px solid rgba( 255, 255, 255, 0.18 );
+// }
+
+.signup_firstname_div input{
+    width: 40%;
+    height: 20%;
+    background-color: aqua;
+  font-family: "Kenia", cursive;
+  color: white;
+  font-size: 40px;
+}
+
+.signup_fullname_div {
     position: relative;
-    /* background: black; */
-    height: 11%;
-    width: 50%;
-    top: 10%;
-    left: 6%;
-}
-
-.signup_account_title{
-    font-family: 'Kenia', cursive;
-    color: white;
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    font-size: 4rem;
-}
-
-.signup_firstname_div{
-    position: relative;
-    /* background-color: black; */
+    // background-color: black;
     height: 9%;
     top: 27%;
-    width: 20%;
-    right: 38%;
-    background: rgba( 255, 255, 255, 0.1 );
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 20px );
--webkit-backdrop-filter: blur( 20px );
-border-radius: 10px;
-border: 1px solid rgba( 255, 255, 255, 0.18 );
+    width: 24%;
+    right: 32%;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  input[type=text]:not(.browser-default){
+    font-size: 196%;
+  }
+
+  .signup_fullname_div input{
+    width: 40%;
+    height: 20%;
+    background-color: aqua;
+  font-family: "Kenia", cursive;
+  color: white;
+  font-size: 40px;
 }
-
-.signup_firstname_div1{
-    // background-color: black;
-    height: 76%;
-    position: relative;
-    top: 11%;
-    width: 92%;
-    left: 3.5%;
-    background: rgba( 255, 255, 255, 0.15 );
-box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-backdrop-filter: blur( 3px );
--webkit-backdrop-filter: blur( 3px );
-border-radius: 10px;
-border: 1px solid rgba( 255, 255, 255, 0.18 );
-}
-
-.signup_firstname{
-    font-family: 'Kenia', cursive;
-    color: white;font-size: 1.5rem;
-}
-
-

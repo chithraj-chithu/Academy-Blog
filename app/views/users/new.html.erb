@@ -32,14 +32,16 @@
                                 </p>
                             </div>
                             <div class="signup_firstname_div">
-                                <div class="signup_firstname_div1">
-                                    <!-- <input placeholder="First name" type="text" class="signup_firstname" id="first_name"
-                                    name="user[first_name]"> -->
-                                </div>
+                                    <input placeholder="First name" type="text" class="signup_firstname" id="first_name"
+                                    name="user[first_name]">
+                            </div>
+
+                            <div class="signup_fullname_div">
+                                <input placeholder="Last name" type="text" class="signup_fullname" id="last_name"
+                            name="user[last_name]">
                             </div>
                         </div>
-                        <input placeholder="First name" type="text" class="signup_firstname" id="first_name"
-                        name="user[first_name]">
+                    
                         <div>
                             <%= image_tag 'boy.png' , alt: 'icon' , class: "man" %>
                         </div>
@@ -49,8 +51,7 @@
                         </a>
 
                         <br>
-                        <input placeholder="Last name" type="text" class="signup_fullname" id="last_name"
-                            name="user[last_name]">
+                        
                         <br>
                         <input placeholder="Mail ID" type="email" class="signup_email" id="email" name="user[email]">
                         <br>
