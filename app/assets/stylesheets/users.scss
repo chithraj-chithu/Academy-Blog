@@ -6,6 +6,10 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Acme&family=Arima+Madurai:wght@700&family=Arima:wght@500&family=Capriola&family=Kenia&family=Langar&family=Merienda:wght@400;700&family=Mogra&family=Oleo+Script+Swash+Caps&family=Permanent+Marker&family=Righteous&family=Sacramento&family=Satisfy&display=swap");
 
+
+.signup_body{
+  position: fixed;
+}
 .fluid {
   height: 20%;
   position: relative;
@@ -41,7 +45,7 @@
 .regester_container {
   position: relative;
   height: 81%;
-  width: 82%;
+  width: 90%;
   border-radius: 63px;
   display: flex;
   background: rgba(255, 255, 255, 0.25);
@@ -50,7 +54,7 @@
   -webkit-backdrop-filter: blur(4px);
   //   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  top: -78%;
+  top: -782px;
   left: 10%;
 }
 
@@ -78,6 +82,32 @@
   display: flex;
   justify-content: center;
   font-size: 4rem;
+  position: relative;
+  top: -18px;
+}
+
+.signup_text2 {
+  position: relative;
+  font-family: "Kenia", cursive;
+  color: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  left: -58px;
+  top: -42px;
+}
+
+.signup_signin {
+  position: relative;
+  font-family: "Kenia", cursive;
+  color: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  left: 98px;
+  top: -129px;
 }
 
 .signup_firstname_div {
@@ -114,7 +144,11 @@
 .signup_firstname_div input {
   width: 40%;
   height: 20%;
-  background-color: aqua;
+  position: relative;
+  border: none;
+  outline: none;
+  background: transparent;
+  // background-color: aqua;
   font-family: "Kenia", cursive;
   color: white;
   font-size: 40px;
@@ -137,9 +171,12 @@
 
 input[type="text"]:not(.browser-default) {
   font-size: 196%;
+  position: relative;
   padding-left: 18px;
   padding-top: 12px;
-  border: none;
+  outline: none;
+  border-bottom: 3px solid transparent;
+  // background-color: #28282d;
   letter-spacing: 1.5px;
 }
 
@@ -243,10 +280,10 @@ input[type="password"]:not(.browser-default) {
   border: none;
   letter-spacing: 1.5px;
 }
-.signup_submit_button{
+.signup_submit_button {
   position: absolute;
-    top: 698px;
-    left: 539px;
+  top: 698px;
+  left: 539px;
 }
 
 .signup_avatar_div {
@@ -265,10 +302,10 @@ input[type="password"]:not(.browser-default) {
 
 .signup_avatar_div input {
   width: 100%;
-    font-family: "Kenia", cursive;
-    position: relative;
-    color: white;
-    left: 106px;
+  font-family: "Kenia", cursive;
+  position: relative;
+  color: white;
+  left: 106px;
 }
 
 input[type="file"]:not(.browser-default) {
@@ -279,7 +316,7 @@ input[type="file"]:not(.browser-default) {
   letter-spacing: 1.5px;
 }
 
-.signup_avatar_text{
+.signup_avatar_text {
   font-size: 196%;
   padding-left: 270px;
   padding-top: 15px;
@@ -293,7 +330,6 @@ input[type="file"]:not(.browser-default) {
 }
 
 .signup_create_button {
-  
   // font-size: 196%;
   all: unset;
   width: 136px;
@@ -318,12 +354,12 @@ input[type="file"]:not(.browser-default) {
 
 .signup_create_button::after,
 .signup_create_button::before {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   right: 0;
   z-index: -99999;
-  transition: all .4s;
+  transition: all 0.4s;
 }
 
 .signup_create_button::before {
@@ -361,20 +397,3 @@ input[type="file"]:not(.browser-default) {
   transition: 0s;
   transform: translate(0, 5%);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
