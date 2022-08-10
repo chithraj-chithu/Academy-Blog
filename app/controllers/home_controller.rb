@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class HomeController < ApplicationController
-  skip_before_action :ensure_user_logged_in 
+  skip_before_action :ensure_user_logged_in
 
   def index
     current_user
@@ -10,24 +12,20 @@ class HomeController < ApplicationController
     if current_user
       @presence = 1
       @user = User.find(current_user.id)
-      puts @presence
-      render "home/index"
     else
       @presence = 0
-      puts @presence
-      render "home/index"
     end
-  
+    puts @presence
+    render 'home/index'
   end
 
   def update_new
     current_user
-    update = Update.new(updates: params[:updates],user_id: current_user.id)
+    update = Update.new(updates: params[:updates], user_id: current_user.id)
     if update.save
-      render plain: "Success"
+      render plain: 'Success'
     else
-      render plain: "False"
+      render plain: 'False'
     end
   end
-  
 end

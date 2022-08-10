@@ -81,8 +81,9 @@
 }
 
 .signup_firstname_div {
-position: relative;
-  background-color: black;  height: 20%;
+  position: relative;
+  background-color: black;
+  // height: 20%;
   height: 9%;
   top: 27%;
   width: 24%;
@@ -110,39 +111,164 @@ position: relative;
 // border: 1px solid rgba( 255, 255, 255, 0.18 );
 // }
 
-.signup_firstname_div input{
-    width: 40%;
-    height: 20%;
-    background-color: aqua;
+.signup_firstname_div input {
+  width: 40%;
+  height: 20%;
+  background-color: aqua;
   font-family: "Kenia", cursive;
   color: white;
   font-size: 40px;
 }
 
 .signup_fullname_div {
-    position: relative;
-    // background-color: black;
-    height: 9%;
-    top: 27%;
-    width: 24%;
-    right: 32%;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-  }
+  position: relative;
+  // background-color: black;
+  height: 9%;
+  top: 27%;
+  width: 24%;
+  right: 32%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
 
-  input[type=text]:not(.browser-default){
-    font-size: 196%;
-  }
+input[type="text"]:not(.browser-default) {
+  font-size: 196%;
+  padding-left: 18px;
+  padding-top: 12px;
+  border: none;
+  letter-spacing: 1.5px;
+}
 
-  .signup_fullname_div input{
-    width: 40%;
-    height: 20%;
-    background-color: aqua;
+.signup_fullname_div input {
+  width: 40%;
+  height: 20%;
+  background-color: aqua;
   font-family: "Kenia", cursive;
   color: white;
   font-size: 40px;
+}
+.signup_email_div {
+  position: absolute;
+  height: 9%;
+  width: 54%;
+  right: 34%;
+  top: 42%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+input[type="email"]:not(.browser-default) {
+  font-size: 196%;
+  padding-left: 18px;
+  padding-top: 12px;
+  border: none;
+  letter-spacing: 1.5px;
+}
+
+.signup_email_div input {
+  width: 40%;
+  height: 20%;
+  background-color: aqua;
+  font-family: "Kenia", cursive;
+  color: white;
+  font-size: 40px;
+}
+
+.signup_password_div {
+  position: absolute;
+  height: 9%;
+  width: 24%;
+  right: 64%;
+  top: 57%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.signup_password_div input {
+  width: 40%;
+  height: 20%;
+  background-color: aqua;
+  font-family: "Kenia", cursive;
+  color: white;
+  font-size: 40px;
+}
+
+input[type="password"]:not(.browser-default) {
+  font-size: 196%;
+  padding-left: 18px;
+  padding-top: 12px;
+  border: none;
+  letter-spacing: 1.5px;
+}
+
+.signup_cpassword_div {
+  position: absolute;
+  height: 9%;
+  width: 24%;
+  right: 34%;
+  top: 57%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.signup_cpassword_div input {
+  width: 40%;
+  height: 20%;
+  background-color: aqua;
+  font-family: "Kenia", cursive;
+  color: white;
+  font-size: 40px;
+}
+
+input[type="password"]:not(.browser-default) {
+  font-size: 196%;
+  padding-left: 18px;
+  padding-top: 12px;
+  border: none;
+  letter-spacing: 1.5px;
+}
+
+.signup_avatar_div {
+  position: absolute;
+  height: 9%;
+  width: 54%;
+  right: 34%;
+  top: 72%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.signup_avatar_div input {
+  width: 100%;
+  // background-color: aqua;
+  font-family: "Kenia", cursive;
+  color: white;
+}
+
+input[type="file"]:not(.browser-default) {
+  font-size: 196%;
+  padding-left: 270px;
+  padding-top: 15px;
+  border: none;
+  letter-spacing: 1.5px;
 }
