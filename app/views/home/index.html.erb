@@ -1,11 +1,11 @@
 <style>
-body {
-    background-image: url(<%= asset_path('bg.png') %>);
-    /* background-attachment: fixed; */
-    background-size: 100%;
-    background-blend-mode: soft-light;
-    background-repeat: no-repeat;
-}
+    body {
+        background-image: url(<%= asset_path('bg.png') %>);
+        /* background-attachment: fixed; */
+        background-size: 100%;
+        background-blend-mode: soft-light;
+        background-repeat: no-repeat;
+    }
 </style>
 <%= content_for :title, "Index" %>
 <div id="first_main">
@@ -18,10 +18,10 @@ body {
         </div>
 
         <a href="">
-            <%= image_tag("logo_3-removebg-preview.png",id: "logo") %></a>
-        <%= image_tag("magnifying-glass.png",id: "icon") %></a>
+            <%= image_tag("logo_3-removebg-preview.png",class: "logo") %></a>
+        <%= image_tag("magnifying-glass.png",class: "icon") %></a>
     <%= link_to "/users/new", method: :get do %>
-        <div id="subscribe_button"></div>
+        <div class="subscribe_button"></div>
     <% end %>
 </div>
 <p id="title1">WELCOME AND</p>
@@ -34,7 +34,19 @@ body {
 
 <div id="icons">
     <%= image_tag("instagram.png",class: "insta") %></a>
-<%= image_tag("facebook.png",class: "fb") %></a><%= image_tag("twitter.png",class: "twit") %></a></div><div class="first_line"></div><div class="second_line"></div><div class="third_line"></div></div><div id="second_main"><div id="news_title"><p class="updates_title1">BREAKING NEWS</p><p class="updates_title2">LATEST UPDATES</p></div><div class="carousel"><% if @updates != nil%><% @updates.each do |update| %>
+<%= image_tag("facebook.png",class: "fb") %></a><%= image_tag("twitter.png",class: "twit") %></a></div><div class="first_line"></div><div class="second_line"></div><div class="third_line"></div></div>
+
+<div class="fwsa_blog">
+    <div id="news_title"><p class="updates_title1">WHAT IS FWSA</p><p class="updates_title2">FWSA</p></div>
+
+    <div class="what_is_fwsa">
+hi
+    </div>
+</div>
+
+
+
+<!-- <div id="second_main"><div id="news_title"><p class="updates_title1">BREAKING NEWS</p><p class="updates_title2">LATEST UPDATES</p></div><div class="carousel"><% if @updates != nil%><% @updates.each do |update| %>
 <% @count+= 1 %>
 <a class="carousel-item" href="#six!">
     <div class="carousal1" id="carousal">
@@ -57,7 +69,7 @@ body {
 
         <%= image_tag(@user.profile_picture,class: "") %>
 
-    </div>
+    </div> -->
 </div><% end %><script>
 function showHideForm(div_id) {
     let div = document.getElementById(div_id)
@@ -72,22 +84,22 @@ function showHideForm(div_id) {
 
 
 }</script><!-- <div class="search">
-            <div class="search_icon"></div>
-    
-            <div class="search_input">
-                <input type="text" placeholder="Search" id="search_input">
-            </div>
-    
-            <span class="clear" onclick="document.getElementById('search_input').value = '' ">
-    
-            </span>
-        </div> --><!-- <script>
-            const search_icon = document.querySelector('.search_icon');
-            const search = document.querySelector('.search')
-            search_icon.onclick = function(){
-                search.classList.toggle('active')
-            }
-       </script> --><script>
+                    <div class="search_icon"></div>
+            
+                    <div class="search_input">
+                        <input type="text" placeholder="Search" id="search_input">
+                    </div>
+            
+                    <span class="clear" onclick="document.getElementById('search_input').value = '' ">
+            
+                    </span>
+                </div> --><!-- <script>
+                    const search_icon = document.querySelector('.search_icon');
+                    const search = document.querySelector('.search')
+                    search_icon.onclick = function(){
+                        search.classList.toggle('active')
+                    }
+               </script> --><script>
 $(document).ready(function () {
     $('.carousel').carousel();
 
