@@ -13,17 +13,45 @@
 <main class="signin_body">
     <form action="/signin" method="post">
         <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-        <% if flash[:error]%>
-            <p class="signin_flash_error">
-                <%= flash[:error]%>
-            </p>
-            <%end%>
-            <p class="signin_text">HELLO</p>
-            <p class="signin_text_again">AGAIN</p>
-            <p class="signin_text2">Don't have an account?</p>
-            <a href="/users/new" class="signin_signup">Sign up</a>
-            <input placeholder="Mail ID" type="email" class="signin_email" id="email" name="user[email]"><br>
-            <input placeholder="Password" type="password" class="signin_password" id="password" name="user[password]"><br>
-            <button type="submit" class="signin_button">Sign in</button>
-        </form>
-    </main>
+            <% if flash[:error]%>
+                <p class="signin_flash_error">
+                    <%= flash[:error]%>
+                </p>
+                <%end%>
+
+                <%= image_tag 'fluid.png' , alt: 'icon' , class: "fluid" %>
+
+                <%= image_tag 'fluid.png' , alt: 'icon' , class: "fluid1" %>
+
+
+                <div class="login_container">
+
+                    <div class="login_account_title_div">
+                        <p class="login_account_title">
+                            Hello Again !
+                        </p>
+                        <p class="login_text2">Don't have an account?</p>
+
+                        <a href="/users/new" class="signin_signup">Sign up</a>
+                    </div>
+
+                    <div class="signin_email_div">
+                        <input placeholder="Mail ID" type="email" class="signin_email" id="email" name="user[email]"></div>
+
+                        <div class="signin_password_div">
+
+                            <input placeholder="Password" type="password" class="signin_password" id="password" name="user[password]"></div>
+
+                            <div class="signup_submit_button">
+                                <button type="submit" class="signup_create_button">Sign in</button>
+                            </div>
+
+
+                        </div>
+
+                        <div>
+                            <%= image_tag 'boy.png' , alt: 'icon' , class: "man" %>
+                        </div>
+
+                    </form>
+                </main>
