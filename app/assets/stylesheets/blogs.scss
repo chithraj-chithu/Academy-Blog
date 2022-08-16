@@ -1,3 +1,74 @@
 // Place all the styles related to the blogs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Arima+Madurai:wght@700&family=Arima:wght@500&family=Capriola&family=Kenia&family=Langar&family=Merienda:wght@400;700&family=Mogra&family=Oleo+Script+Swash+Caps&family=Permanent+Marker&family=Righteous&family=Sacramento&family=Satisfy&family=Signika+Negative:wght@500&display=swap");
+
+
+.blog_title1{
+    display: flex;
+    color: white;
+    font-family: "Signika Negative", sans-serif;
+    margin-top: 170px;
+    margin-left: 45%;
+    font-size: 50px;
+    font-weight: bold;
+}
+.blog_title2{
+    display: flex;
+    color: white;
+    font-family: "Signika Negative", sans-serif;
+    margin-top: -932px;
+    margin-left: 34%;
+    font-size: 80px;
+    font-weight: bold;
+}
+
+#blog_header {
+    height: 120px;
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    background-color: rgba(17, 25, 40, 0.75);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
+  }
+
+  .blog_content1{
+    display: flex;
+    color: white;
+    font-family: "Signika Negative", sans-serif;
+    margin-top: -868px;
+    margin-left: 593px;
+    font-size: 30px;
+    text-align: center;
+    text-transform: capitalize;
+  }
+  .more1{
+    background-image: linear-gradient(to right top, #049ac4, #0094e7, #0086ff, #8368ff, #d812eb);
+    height: 55px;
+    width: 140px;
+    position: absolute;
+    top: 78%;
+    left: 896px;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 0 7px white;
+    font-family: "Capriola", sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+  }
+
+
+.first_line1 {
+    height: 6px;
+    width: 30px;
+    position: absolute;
+    left: 25px;
+    background-color: white;
+    display: flex;
+    /* margin-top: -2170px; */
+    transition: 0.5s;
+    cursor: pointer;
+    top: 46%;
+  }

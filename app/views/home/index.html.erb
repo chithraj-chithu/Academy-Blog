@@ -21,10 +21,17 @@
                 <%= image_tag("logo_3-removebg-preview.png",class: "logo" ) %>
             </a>
             <%= image_tag("magnifying-glass.png",class: "icon" ) %></a>
+                <% if @presence != 1 %>
                 <%= link_to "/users/new" , method: :get do %>
                     <div class="subscribe_button"></div>
                     <% end %>
+                    <% elsif @presence == 1 %>
+                        <p class="user_firstname">
+                            <%= @user.first_name%>
+                        </p>
+                    <% end %>
         </div>
+        <%# <input type="text" class="search_input"> %>
         <p id="title1">WELCOME AND</p>
         <p id="title2">KNOW ABOUT FWSA</p>
         <p class="content1">This is your space where you can learn about FWSA</p>
@@ -102,16 +109,14 @@
                     </p>
 
                     <button class="button-readmore" role="button">
-                        <a href="https://www.youtube.com/watch?v=mtxwKDswoLo">Read More</a>
+                        <a href="https://www.freshworks.com/company/philanthropy/software-academy/">Read More</a>
                     </button>
 
                 </div>
 
                 <div class="for_who_fwsa_video">
 
-                    <iframe src="https://www.youtube.com/embed/QXCsKdFX67Y" title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/7l0EZPXeKdQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
                 </div>
             </div>
@@ -128,28 +133,28 @@
         <div class="journey1">
             
                 <div class="journey1_circle1">
-                    <%= image_tag("whatsapp-dp-116.jpg",class: "insta_images" ) %>
+                    <%= image_tag("fwsa.png",class: "insta_images" ) %>
                 </div>
                 <p class="journey1_text1">Our First Milestone
                     <br>
                     FWSA Started (2019)
                 </p>
                 <div class="journey1_circle2">
-                    <%= image_tag("whatsapp-dp-52.jpg",class: "insta_images" ) %>
+                    <%= image_tag("fwsa1.png",class: "insta_images" ) %>
                 </div>
                 <p class="journey1_text2">Our Batch 1
                     <br>
                     (2019)
                 </p>
                 <div class="journey1_circle3">
-                    <%= image_tag("whatsapp-dp-116.jpg",class: "insta_images" ) %>
+                    <%= image_tag("fwsa2.jpg",class: "insta_images" ) %>
                 </div>
                 <p class="journey1_text3">Our Batch 2
                     <br>
                     (2021)
                 </p>
                 <div class="journey1_circle4">
-                    <%= image_tag("whatsapp-dp-52.jpg",class: "insta_images" ) %>
+                    <%= image_tag("soon.jpg",class: "insta_images" ) %>
                 </div>
                 <p class="journey1_text4">
                     Our batch 3
@@ -196,6 +201,7 @@
                             <p class="Update"><%= update.updates %></p>
                             <%= image_tag("—Pngtree—painted graffiti quotation marks ted_5054044.png",class: "quote1", id: "quote") %>
                             <p class="Date"><%= @updated_user.created_at.strftime("Date: %F , Time: %T") %></p>
+                            
                             <%= image_tag(@updated_user.profile_picture,class: "profile_pic") %>
                         </div>
                     </a><% end %><% end %></div><% if @presence == 1 %><%= image_tag("plus.png",class: "plus_icon",onclick: "showHideForm('show#{@count}')") %><% end %><% if @presence == 0 %><%= image_tag("plus.png",class: "plus_icon",onclick: "window.location.href='/signin'") %><% end %></div><div id="third_part"></div><% if @presence == 1%><div id="show<%= @count %>" style="display: none;"><div style="background-color: blue;"><p class="Author"><%= @user.first_name%></p><div style="background-color: blue;">
@@ -207,8 +213,9 @@
                                 </form>
                             </div>
                             <%= image_tag("—Pngtree—painted graffiti quotation marks ted_5054044.png",class: "", id: "") %>
-                    
+                            <% if @user.profile_picture.attached? %>
                             <%= image_tag(@user.profile_picture,class: "") %>
+                            <% end %>
                     
                         </div> -->
     </div>

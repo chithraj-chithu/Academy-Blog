@@ -55,6 +55,22 @@
   /* letter-spacing: 3px; */
 }
 
+.search_input{
+  position: absolute;
+  background-color: #0086ff;
+}
+
+.user_firstname {
+  color: white;
+  height: auto;
+  width: auto;
+  position: absolute;
+  top: 42%;
+  right: 115px;
+  font-family: "Capriola", sans-serif;
+  font-size: 15px;
+}
+
 .logo {
   position: absolute;
   margin-top: -149px;
@@ -1246,10 +1262,10 @@
 .flogo_footer {
   // background-color: red;
   position: relative;
-    height: 40px;
-    top: -123px;
-    left: 70%;
-    border-radius: 7px;
+  height: 40px;
+  top: -123px;
+  left: 70%;
+  border-radius: 7px;
 }
 .i_logo_footer {
   // background-color: red;
@@ -1276,4 +1292,3 @@
   left: 76%;
   border-radius: 7px;
 }
-
