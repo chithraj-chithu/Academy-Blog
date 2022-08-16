@@ -9,7 +9,8 @@ class SessionsController < ApplicationController
     user = User.find_by(email: login_params[:email])
     if user&.authenticate(login_params[:password])
       session[:current_user_id] = user.id
-      render plain: 'Success'
+      # render plain: 'Success'
+      redirect_to '/home'
       # redirect_to home_path
     else
       flash[:error] = 'Invalid email or password!'
