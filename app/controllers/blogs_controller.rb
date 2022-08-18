@@ -15,7 +15,6 @@ class BlogsController < ApplicationController
     else
       @presence = 0
     end
-    puts @presence
     render 'blogs/index'
   end
 
@@ -23,7 +22,7 @@ class BlogsController < ApplicationController
     current_user
     user = User.find(current_user.id)
     user_id = user.id
-    blog = Blog.new(blog: blog_params[:blog], user_id: user_id)
+    blog = Blog.new(blog: blog_params[:blog], user_id: user_id, title: blog_params[:title])
     blog.images.attach(blog_params[:images])
     if blog.save
       redirect_to blogs_path
@@ -79,6 +78,6 @@ class BlogsController < ApplicationController
   private
 
   def blog_params
-    params.require(:blog).permit(:blog, images: [])
+    params.require(:blog).permit(:blog, :title, images: [])
   end
 end
