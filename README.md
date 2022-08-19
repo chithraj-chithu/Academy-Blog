@@ -10,17 +10,24 @@ We can get updates from the academy. We'll be able to create our own blog and se
 I wanted to make my project visible to all. Then I thought the next batch students will look through my website and get inspired by it. So I started doing this project for the academy.
 
 ## Features
-1. Register (Completed)
-2. Login (Backend completed)
-3. Logout (Backend completed)
-4. Latest updates (Backend completed)
-5. News headlines (Backend completed)
-6. Add blog (Backend completed)
-7. Delet blog (Backend completed)
-8. Add comments (Backend completed)
-9. Delete comments (Backend completed)
-10. Like a blog (Backend completed)
-11. Dislike a blog (Backend completed)
-12. Contact (yet to do)
+###1. Register
+Create a account to add blogs and likes also. Otherwise user can read that blogs.
+###2. Login
+Login with Mail Id and password to become a user
+###3. Logout (Backend completed)
+Logout from that website. That user details are stored in database.
+###6. Add blog
+If a user want to add and publish a blog, first that user must be logged in, otherwise,they can't add.So, your can enter their blog title and content,with a image.
+###7. Delete blog
+If a user wants to delete theirvblog. they can delete it also.
+###8. Add comments
+User can add their comments in blogs
+###9. Delete comments
+User can delete their comments in blogs
+###10. Like
+User can add likes in blogs
+###11. Dislike
+User can add dislikes in blogs
+12. Contact Us
 
 
