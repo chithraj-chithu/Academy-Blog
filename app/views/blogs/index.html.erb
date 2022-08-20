@@ -1,55 +1,59 @@
 <style>
-    body {
-        background-image: url(<%= asset_path('blogs_bg.png') %>);
-        /* background-attachment: fixed; */
-        background-size: 100%;
-        background-blend-mode: soft-light;
-        background-repeat: no-repeat;
-        
-    }
+  body {
+    background-image: url(<%= asset_path('blogs_bg.png') %>);
+    /* background-attachment: fixed; */
+    background-size: 100%;
+    background-blend-mode: soft-light;
+    background-repeat: no-repeat;
+
+  }
 </style>
+
+
 <%= content_for :title, "Index" %>
-    <div id="first_main">
-        <div id="blog_header">
-            <div class="navbar">
-                <a href="http://localhost:3000/home" id="home">Home</a>
-                <a href="" id="achivements">News</a>
-                <a href="/blogs" data-method="get" id="profile">Blogs</a>
-                <a href="" id="about">About Us</a>
-            </div>
+  <div id="first_main">
+    <div id="blog_header">
+      <div class="navbar">
+        <a href="http://localhost:3000/home" id="home">Home</a>
+        <a href="" id="achivements">News</a>
+        <a href="/blogs" data-method="get" id="profile">Blogs</a>
+        <a href="" id="about">About Us</a>
+      </div>
 
-            <a href="">
-                <%= image_tag("logo_3-removebg-preview.png",class: "logo" ) %>
-            </a>
-            <%= image_tag("magnifying-glass.png",class: "icon" ) %></a>
-                <% if @presence != 1 %>
-                <%= link_to "/users/new" , method: :get do %>
-                    <div class="subscribe_button"></div>
-                    <% end %>
-                    <% elsif @presence == 1 %>
-                        <p class="user_firstname">
-                            <%= @current_user.first_name%>
-                        </p>
-                    <% end %>
-        </div>
-        
-        <p class="blog_title1">Hi Blogger</p>
-        <p class="blog_title2">This Page is for You</p>
-        <p class="blog_content1"> in this section everyone get an opportunity to <br> express their thoughts about freshworks software Academy. <br> write blogs about software Academy and show everyone <br> you are craft person ship</p>
-        
-
-        <!-- <button class="more1">More About Us</button> -->
-
-        <div id="icons">
-            <%= image_tag("instagram.png",class: "insta" ) %></a>
-                <%= image_tag("facebook.png",class: "fb" ) %></a>
-                    <%= image_tag("twitter.png",class: "twit" ) %></a>
-        </div>
-        <div class="blog_first_line1"></div>
-        <div class="blog_second_line"></div>
-        <div class="blog_third_line"></div>
+      <a href="">
+        <%= image_tag("logo_3-removebg-preview.png",class: "logo" ) %>
+      </a>
+      <%= image_tag("magnifying-glass.png",class: "icon" ) %></a>
+        <% if @presence !=1 %>
+          <%= link_to "/users/new" , method: :get do %>
+            <div class="subscribe_button"></div>
+            <% end %>
+              <% elsif @presence==1 %>
+                <p class="user_firstname">
+                  <%= @current_user.first_name%>
+                </p>
+                <% end %>
     </div>
-  <!-- <div class="blog_second_main">
+
+    <p class="blog_title1">Hi Blogger</p>
+    <p class="blog_title2">This Page is for You</p>
+    <p class="blog_content1"> in this section everyone get an opportunity to <br> express their thoughts about
+      freshworks software Academy. <br> write blogs about software Academy and show everyone <br> you are craft person
+      ship</p>
+
+
+    <!-- <button class="more1">More About Us</button> -->
+
+    <div id="icons">
+      <%= image_tag("instagram.png",class: "insta" ) %></a>
+        <%= image_tag("facebook.png",class: "fb" ) %></a>
+          <%= image_tag("twitter.png",class: "twit" ) %></a>
+    </div>
+    <div class="blog_first_line1"></div>
+    <div class="blog_second_line"></div>
+    <div class="blog_third_line"></div>
+  </div>
+  <div class="blog_second_main">
     <div class="blog_titles">
       <p class="blog_titles1">thoughts to words</p>
       <p class="blogs_title2">Blogs</p>
@@ -94,71 +98,228 @@
   <p>20 comments</p>
 </div>
 </div>
-</div> -->
- <div class="blog_second_main">
+</div>
+
+
+
+<div class="blog_second_main1">
 
     <% @blogs.each do |blog|%>
-    <div class="blog_titles">
-       <p class="blog_titles1">thoughts to words</p>
-      <p class="blogs_title2">Blogs</p>
+      <div class="blog_titles">
+        <!-- <p class="blog_titles1">thoughts to words</p>
+        <p class="blogs_title2">Blogs</p> -->
+      </div>
+
+      <div class="blog_main1" style="margin-top: 30px;">
+        <div class="bolg_user_profile">
+          <% if User.find(blog.user_id).profile_picture.attached? %>
+          <%= image_tag(User.find(blog.user_id).profile_picture,class: "blog_user_icon" ) %>
+            <p class="blog_user_name">
+              <%= User.find(blog.user_id).first_name %>
+            </p>
+            <% end %>
+            <p class="blog_user_posted">
+              Posted On : <%= blog.created_at.strftime("%d-%m-%Y") %>
+            </p>
+
+        </div>
+        <div class="blog_content">
+
+          <div class="blog_content_div">
+            <p class="blog_content_title">
+              <%= blog.title %>
+            </p>
+            <p class="blog_content_para">
+              <%= blog.blog %>
+            </p>
+          </div>
+          <% if blog.images.attached? %>
+          <div class="blog_content_image_div">
+            <%= image_tag(blog.images.first)%>
+          </div>
+          <% end %>
+        </div>
+
+        <!-- Delete blog -->
+        <% if @presence == 1%>
+        <a href="/blogs/<%=blog.id%>" data-method="delete" class="delete_blog_button" %>Delete blog</a>
+        <% end %>
+
+        <!-- Add reactions -->
+        <% @blog_reaction_value = BlogReaction.where(blog_id: blog.id)%>
+        <% if @blog_reaction_value == []%>
+        <div>
+             <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
+              <input type="hidden" name="reaction" value="1">
+              <!-- <%= form.submit "Like",class: "blog-submit-button"%> -->
+              <p class="blog_like_text_count1" style='cursor:pointer; color : <%= @reaction_boolean=="1" ? ' white' : ' white' %>'>Like
+              </p>
+              <%=image_submit_tag("like.png",class: "blog-submit-button1")%>
+              <% end %>
+          </div>
+          <div>
+          <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
+              <input type="hidden" name="reaction" value="0">
+              <!-- <%= form.submit "DisLike",class: "blog-submit-button"%> -->
+              <p class="blog_dislike_text_count1" style='cursor: pointer; color : <%= @reaction_boolean=="0" ? ' white;' : ' white;' %>'>Dislike
+              </p>
+              <%=image_submit_tag("dislike1.png",class: "blog-submit-button2")%>
+              <% end %>
+          </div>
+        <% else %>
+           <% @like = 0%>
+           <% @dislike = 0%>
+           <% @user_presence = 0%>
+           <% @reaction_boolean = nil %>
+
+
+          <% @blog_reaction_value.each do |reaction| %>
+              <% if reaction.reaction == "1"%>
+              <% @like = @like + 1%>
+               <% elsif reaction.reaction == "0"%>
+              <% @dislike = @dislike + 1%>
+             <% end %>
+           <% end %>
+
+
+           <% @blog_reaction_value.each do |reaction| %>
+             <% if reaction.user_id == @current_user.id%>
+             <%@user_presence = 1%>
+             <%@reaction_boolean =reaction.reaction %>
+             <% @reaction_value = reaction.id %>
+             <% break %>
+            <% else%>
+            <%@user_presence = 0%>
+           <% end %>
+        <% end %>
+        <% end %>
+
+        <% if @user_presence == 0 %>
+        <div>
+            <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
+            <input type="hidden" name="reaction" value="1">
+                <%= form.submit "Like",class: "blog-submit-button"%>
+            </div>
+        <% end %>
+        <div>
+            <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
+            <input type="hidden" name="reaction" value="0">
+                <%= form.submit "dislike",class: "blog-submit-button"%>
+            </div>
+        <% end %>
+        <% elsif @user_presence == 1 %>
+        <% if @reaction_boolean == "0"%>
+            <div>
+                <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "put") do|form| %>
+                <input type="hidden" name="reaction" value="1">
+                    <p class="blog_like_text_count1" style='cursor:pointer; color : <%= @reaction_boolean=="1" ? ' white' : ' white' %>'>Like
+                    </p>
+                    <%=image_submit_tag("like.png",class: "blog-submit-button1")%>
+                <% end %>
+                <%=@like%>
+            </div>
+            <div>
+           <p class="like_count_numbers"><%=@like%></p>
+            </div> 
+            <div>
+                <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "delete") do|form| %>
+                <input type="hidden" name="reaction" value="0">
+                    <p class="blog_dislike_text_count1" style='cursor: pointer; color : <%= @reaction_boolean=="0" ? ' white;' : ' white;' %>'>Dislike
+                    </p>
+                    <%=image_submit_tag("dislike1.png",class: "blog-submit-button2")%>
+                <% end %>
+            </div>
+            <div>
+              <p class="dislike_count_numbers"><%=@dislike%></p>
+            </div>
+            
+            <% elsif @reaction_boolean == "1"%>
+            <div>
+                <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "delete") do|form| %>
+                <input type="hidden" name="reaction" value="1">
+                    <p class="blog_like_text_count1" style='cursor:pointer; color : <%= @reaction_boolean=="1" ? ' white;' : ' white;' %>'>Like
+                    </p>
+                    <%=image_submit_tag("like.png",class: "blog-submit-button1")%>
+                   
+                <% end %>
+            </div>
+            <div class="like_count_numbers"> <%=@like%></div>
+           
+            <div>
+                <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "put") do|form| %>
+                <input type="hidden" name="reaction" value="0">
+                    <p class="blog_dislike_text_count1" style='cursor: pointer; color : <%= @reaction_boolean=="0" ? ' blue;' : ' white;' %>'>Dislike
+                    </p>
+                    <%=image_submit_tag("dislike1.png",class: "blog-submit-button2") %>
+                <% end %>
+            </div>
+            <div class="dislike_count_numbers"> <%=@dislike%></div>
+        <% end %>
+      <% end %>
+      
+
+      </div>
+
+      
+      <% end %>
+
+  </div>
+
+  <div class="add_blog_form">
+    <%= form_with(url: "/blogs", method: "post") do |form| %>
+    <h2 class="heading-field">Add your blog here...</h2>
+    <div class="add_blog_form_div">
+      <div class="input_field_whole_div">
+    <div class="input_field_div">
+      <input placeholder="Title" type="text" name="blog[title]" id="blog[title]" class="valid">
+      <!-- <%= form.text_field "blog[title]",placeholder: "Title"%> -->
     </div>
-
-  <div class="blog_main">
-  <div class="bolg_user_profile">
-    <%= image_tag(@current_user.profile_picture,class: "blog_user_icon" ) %>
-    <p class="blog_user_name">
-    <%=  @current_user.first_name%>
-    </p>
-    <p class="blog_user_posted">
-      Posted On : <%= blog.created_at.strftime("%d-%m-%Y") %>
-    </p>
-
-  </div>
-  <div class="blog_content">
-  
-    <div class="blog_content_div">
-    <p class="blog_content_title"><%= blog.title %></p>
-    <p class="blog_content_para"><%= blog.blog %>
-  </p>
-  </div>
-  <div class="blog_content_image_div">
-    <%= image_tag(blog.images.first)%>
-  </div>
-  </div>
-
-  <!-- <div class="blog_content_like">
-    <div>
-    <div id="like-icon1" class="like-icon-div" onclick="likeiconoutline()">
-    <%= image_tag("like.png",class: "like_icon" ) %>
-  </div>
-  <div id="like-icon2" class="like-icon-div1" onclick="likeiconwhite()">
-    <%= image_tag("thumbsup.png",class: "like_icon" ) %>
-  </div>
+    <div class="input_field_div">
+      <input multiple="multiple" class="blog-file-button" type="file" name="blog[images][]" id="blog[images]" style="display: none;">
+      <label for="blog[images]" class="upload-button-lable">
+        <span class="upload-button-span">
+        <%=image_tag("upload-img.png",class: "upload-button")%>
+      </span>
+        <span class="upload-button-add-image">Add image</span>
+      </label>
+      <!-- <%= form.file_field "blog[images]", multiple: true ,class: "blog-file-button" %> -->
+    </div>
+    </div>
+    <div class="input_field_div1">
+    <textarea placeholder="Blog" type="text" name="blog[blog]" id="blog[blog]" class="valid">
+      </textarea>
+      <label>Blog</label>
+      <!-- <%= form.text_field "blog[blog]",placeholder: "Blog" %> -->
+    </div>
+    <div class="input_field_div2">
+      <input type="submit" name="commit" value="Submit" class="blog-submit-button" data-disable-with="Submit">
+      <!-- <%= form.submit "Submit",class: "blog-submit-button" %> -->
+    </div>
 </div>
-    <p>1140 Likes</p>
-  </div> -->
+  <% end %>
+  </div>
 
   <script>
 
-    function likeiconoutline(){
+    function likeiconoutline() {
       document.getElementById("like-icon2").style.display = "block";
       document.getElementById("like-icon1").style.display = "none";
       document.getElementById("dislike-icon1").style.display = "block";
       document.getElementById("dislike-icon2").style.display = "none";
     }
-    function likecountline(){
+    function likecountline() {
       document.getElementById("dislike-icon1").style.display = "block";
       document.getElementById("dislike-icon2").style.display = "none";
       document.getElementById("like-icon1").style.display = "block";
       document.getElementById("like-icon2").style.display = "none";
     }
-    function dislikeiconoutline(){
+    function dislikeiconoutline() {
       document.getElementById("dislike-icon2").style.display = "block";
       document.getElementById("dislike-icon1").style.display = "none";
       document.getElementById("like-icon1").style.display = "block";
       document.getElementById("like-icon2").style.display = "none";
     }
-    function dislikecountline(){
+    function dislikecountline() {
       document.getElementById("dislike-icon1").style.display = "block";
       document.getElementById("dislike-icon2").style.display = "none";
       document.getElementById("like-icon1").style.display = "block";
@@ -168,272 +329,10 @@
 
   </script>
 
-  <div class="blog-content-whole-div">
-
-<% @blog_creator = User.find(blog.user_id)%>
-<!-- <%= @blog_creator.first_name %> -->
-<!-- <%= blog.title %> -->
-<!-- <%= blog.created_at.strftime("%d/%m/%Y at %I:%M %p") %> -->
-
-<!-- Delete blog button -->
-  <!-- kasi commented -->
-<!-- <% if @presence == 1 %>
-    <% if blog.user_id == @current_user.id%>
-        <%= form_with(url: "/blogs/#{blog.id}", method: "delete", data: {confirm: 'Are youu sure?'}) do|form| %>
-        <%= form.submit "Delete blog"%>
-    <% end %>
-<% end %> -->
-<!-- kasi -->
-
-<!-- Like,Dislike -->
-<!-- <% @blog_reaction_value = BlogReaction.where(blog_id: blog.id)%> -->
-<% if @blog_reaction_value == []%>
-    <div class="blog_content_like">
-        <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
-        <input type="hidden" name="reaction" value="1">
-        <div class="input-field-like-div">
-        <input type="submit" name="Like" value="Like" data-disable-with="Like" id="like-btn">
-      </div>
-        <label for="like-btn">
-          <div class="like-btn-div">
-             <div>
-                <div id="like-icon1" class="like-icon-div" onclick="likeiconoutline()">
-                <%= image_tag("like.png",class: "like_icon" ) %>
-              </div>
-              <div id="like-icon2" class="like-icon-div1" onclick="likeiconwhite()">
-                <%= image_tag("thumbsup.png",class: "like_icon" ) %>
-              </div>
-            </div>
-          </div>
-        </label>
-            <% form %>
-        </div>
-        <div class="blog_content_like1">
-          <p>0 Like</p>
-      </div>
-    <% end %> 
-    <div class="dislike-btn-div">
-        <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
-        <input type="hidden" name="reaction" value="0">
-        <input type="submit" name="DisLike" value="DisLike" data-disable-with="DisLike" id="dislike-btn-label2" style="display: none;">
-        <label for="dislike-btn-label2">
-          <div class="dislike-btn-div">
-            <div>
-            <div id="dislike-icon1" class="like-icon-div" onclick="dislikeiconoutline()" style="display: block;">
-            <%= image_tag("dislike1.png",class: "like_icon" ) %>
-          </div>
-          <div id="dislike-icon2" class="like-icon-div1" onclick="dislikecountline()" style="display: none;">
-            <%= image_tag("dislike.png",class: "like_icon" ) %>
-          </div>
-          </div>
-          </div>
-        </label>   
-        <% form %>
-        </div>
-        <div class="blog_content_dislike">
-          <p>0 dislike</p>
-        </div>
-    <% end %>
-    <% elsif @blog_reaction_value != []%>
-    <% @like = 0%>
-    <% @dislike = 0%>
-    <% @user_presence = 0%>
-    <% @reaction_boolean = nil %>
-    <% @blog_reaction_value.each do |reaction| %>
-        <% if reaction.reaction == "1"%>
-            <% @like = @like + 1%>
-            <% elsif reaction.reaction == "0"%>
-            <% @dislike = @dislike + 1%>
-        <% end %>
-
-    <% end %>
-    <% @blog_reaction_value.each do |reaction| %>
-        <% if reaction.user_id == @current_user.id%>
-            <%@user_presence = 1%>
-            <%@reaction_boolean =reaction.reaction %>
-            <% @reaction_value = reaction.id %>
-            <% break %>
-        <% else%>
-            <%@user_presence = 0%>
-        <% end %>
-    <% end %>
-    <% if @user_presence == 0 %>
-        <div>
-            <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
-            <input type="hidden" name="reaction" value="1">
-            <input type="submit" name="Like" value="Like" data-disable-with="Like" id="like-btn3">
-            <label for="like-btn3">
-              <div class="like-btn-div">
-                <div>
-                <div id="like-icon1" class="like-icon-div" onclick="likeiconoutline()">
-                <%= image_tag("like.png",class: "like_icon" ) %>
-              </div>
-              <div id="like-icon2" class="like-icon-div1" onclick="likeiconwhite()">
-                <%= image_tag("thumbsup.png",class: "like_icon" ) %>
-              </div>
-              </div>
-              </div>
-            </label>
-                <% form %>
-            </div>
-        <% end %>
-        <div style="background-color: white;">
-            <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
-            <input type="hidden" name="reaction" value="0">
-        <input type="submit" name="DisLike" value="DisLike" data-disable-with="DisLike" id="dislike-btn-label3" style="display: none;">
-        <label for="dislike-btn-label3">
-          <div class="dislike-btn-div">
-            <div>
-            <div id="dislike-icon1" class="like-icon-div" onclick="dislikeiconoutline()" style="display: block;">
-            <%= image_tag("dislike1.png",class: "like_icon" ) %>
-          </div>
-          <div id="dislike-icon2" class="like-icon-div1" onclick="dislikecountline()" style="display: none;">
-            <%= image_tag("dislike.png",class: "like_icon" ) %>
-          </div>
-          </div>
-          </div>
-        </label>  
-                <% form %>
-            </div>
-        <% end %>
-        <% elsif @user_presence == 1 %>
-        <% if @reaction_boolean == "0"%>
-            <div>
-                <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "put") do|form| %>
-                <input type="hidden" name="reaction" value="1">
-                <label for="like-btn-label2">
-                  <div class="like-btn-div">
-                    <div>
-                    <div id="like-icon1" class="like-icon-div" onclick="likeiconoutline()" style="display: block;">
-                    <%= image_tag("like.png",class: "like_icon" ) %>
-                  </div>
-                  <div id="like-icon2" class="like-icon-div1" onclick="likecountline()" style="display: none;">
-                    <%= image_tag("thumbsup.png",class: "like_icon" ) %>
-                  </div>
-                  </div>
-                  </div>
-                </label>
-                <input type="submit" name="commit" value="Submit" data-disable-with="Submit" id="like-btn-label2" style="display: none;">
-                    <% form %>
-                <% end %>
-            </div>
-            <div class="blog_content_like">
-              <p><%=@like%> Likes</p>
-          </div>
-          <div>
-                <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "delete") do|form| %>
-                <input type="hidden" name="reaction" value="0">
-                <label for="dislike-btn-label2">
-                  <div class="dislike-btn-div">
-                    <div>
-                    <div id="dislike-icon1" class="like-icon-div" onclick="dislikeiconoutline()" style="display: none;">
-                    <%= image_tag("dislike1.png",class: "like_icon" ) %>
-                  </div>
-                  <div id="dislike-icon2" class="like-icon-div1" onclick="dislikecountline()" style="display: block;">
-                    <%= image_tag("dislike.png",class: "like_icon" ) %>
-                  </div>
-                  </div>
-                  </div>
-                </label>
-                    <input type="submit" name="commit" value="Submit" data-disable-with="Submit" id="dislike-btn-label2" style="display: none;">
-                    <% form %>
-                <% end %>
-            </div>
-            <div class="blog_content_dislike">
-              <p><%=@dislike%> dislikes</p>
-            </div>
-            <% elsif @reaction_boolean == "1"%>
-            <div>
-                <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "delete") do|form| %>
-                <input type="hidden" name="reaction" value="1">
-                <label for="like-btn-label">
-                  <div class="like-btn-div">
-                    <div>
-                    <div id="like-icon1" class="like-icon-div" onclick="likeiconoutline()" style="display: none;">
-                    <%= image_tag("like.png",class: "like_icon" ) %>
-                  </div>
-                  <div id="like-icon2" class="like-icon-div1" onclick="likecountline()" style="display: block;">
-                    <%= image_tag("thumbsup.png",class: "like_icon" ) %>
-                  </div>
-                  </div>
-                  </div>
-                </label>
-                    <input type="submit" name="commit" value="Submit" data-disable-with="Submit" id="like-btn-label" style="display: none;">
-                    <% form %>
-                <% end %>
-            </div>
-            <div class="blog_content_like">
-              <p><%=@like%> Likes</p>
-          </div>
-            <div>
-                <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "put") do|form| %>
-                <input type="hidden" name="reaction" value="0">
-                <label for="dislike-btn-label">
-                  <div class="dislike-btn-div">
-                    <div>
-                    <div id="dislike-icon1" class="like-icon-div" onclick="dislikeiconoutline()" style="display: block;">
-                    <%= image_tag("dislike1.png",class: "like_icon" ) %>
-                  </div>
-                  <div id="dislike-icon2" class="like-icon-div1" onclick="dislikecountline()" style="display: none;">
-                    <%= image_tag("dislike.png",class: "like_icon" ) %>
-                  </div>
-                  </div>
-                  </div>
-                </label>
-                    <input type="submit" name="commit" value="Submit" data-disable-with="Submit" id="dislike-btn-label" style="display: none;">
-                    <% form %>
-                <% end %>
-            </div>
-            <div class="blog_content_dislike">
-            <p><%=@dislike%> dislikes</p>
-          </div>
-        <% end %>
-    <% end %>
-<% end %><% end %><%@count += 1%>
 
 
-<!-- Add comment button -->
-<div class="btn-div">
-<%= button_tag 'Comments', type: 'button',onclick: "showHideForm('show#{@count}')", id: "btn-div-label",style: "display: none;"%>
-<label for="btn-div-label">
-  <div class="blog_content_comment">
+
     
-    <%= image_tag("comment.png",class: "comment_icon" ) %>
-    <p>comments</p>
-  </div>
-</label>
-</div>
 
 
-</di--v>
-</div>
-<!-- <% end  %> -->
-<% end %>
-</div>
-
-<!-- Add blog buttons -->
-<div>
-  <% if @presence == 1%>
-  <%= form_with(url: "/blogs", method: "post") do|form| %>
-        <%= form.text_field "blog[title]",placeholder: "Enter your title here" %>
-        <%= form.text_area "blog[blog]",class: "",placeholder: "Add your blog here"%>
-        <%= form.file_field "blog[images]",multiple: true,class: "",  :required => true%>
-        <%= form.submit "Continue"%>
-        <% end %>
-  <% end %>
-  </div>
-
-
-
-
-
-
-
-<script>function showHideForm(div_id) {
-    div = document.getElementById(div_id);
-    if (div.style.display == "none") {
-        div.style.display = "block"
-    } else {
-        div.style.display = "none"
-    }
-}</script>
+  

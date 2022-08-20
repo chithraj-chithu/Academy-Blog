@@ -14,6 +14,7 @@ class HomeController < ApplicationController
       @user = User.find(current_user.id)
     else
       @presence = 0
+      
     end
     puts @presence
     render 'home/index'

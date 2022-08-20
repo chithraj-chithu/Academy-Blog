@@ -63,7 +63,10 @@
 
                             <div class="signup_avatar_div">
                                 <p class="signup_avatar_text">Your Picture</p>
-                                <input type="file" id="avatar" name="user[profile_picture]" class="signup_avatar">
+                                <input type="file" id="avatar" name="user[profile_picture]" class="signup_avatar" style="display: none;">
+                                <label for="avatar">
+                                    <%= image_tag 'attachment.png' , alt: 'icon' , class: "attachmentpng" %>
+                                </label>
                             </div>
 
                            <div class="signup_submit_button">

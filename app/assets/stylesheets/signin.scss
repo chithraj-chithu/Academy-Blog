@@ -142,6 +142,23 @@
     letter-spacing: 1.5px;
   }
   
+element.style {
+}
+.signup_firstname:focus{
+  all: unset;
+  outline: none;
+  border: none;
+  font-size: 30px;
+  border-bottom: none;
+}
+// input[type="text"]:not(.browser-default):focus{
+//   all: unset;
+//   outline: none;
+//   border: none;
+//   font-size: 30px;
+//   border-bottom: none;
+// }
+  
   .signup_fullname_div input {
     width: 40%;
     height: 20%;
@@ -269,6 +286,13 @@
     color: white;
     left: 106px;
   }
+
+  .attachmentpng{
+    position: absolute;
+    left: 55%;
+    height: 50px;
+    top: 14%;
+  }
   
   input[type="file"]:not(.browser-default) {
     font-size: 196%;
@@ -276,6 +300,7 @@
     padding-top: 15px;
     border: none;
     letter-spacing: 1.5px;
+    all: unset;
   }
   
   .signup_avatar_text {
@@ -284,7 +309,7 @@
     padding-top: 15px;
     border: none;
     letter-spacing: 1.5px;
-    right: 443px;
+    right: 390px;
     position: absolute;
     font-family: "Kenia", cursive;
     color: #cfcfd0;
