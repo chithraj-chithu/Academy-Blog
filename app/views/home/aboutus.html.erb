@@ -1,0 +1,41 @@
+<style>
+    body {
+      background-image: url(<%= asset_path('blogs_bg.png') %>);
+      /* background-attachment: fixed; */
+      background-size: 100%;
+      background-blend-mode: soft-light;
+      background-repeat: no-repeat;
+  
+    }
+  </style>
+
+<%= content_for :title, "Index" %>
+<div id="first_main">
+  <div id="blog_header">
+    <div class="navbar">
+      <a href="http://localhost:3000/home" id="home">Home</a>
+      <a href="" id="achivements">News</a>
+      <a href="/blogs" data-method="get" id="profile">Blogs</a>
+      <a href="/aboutus" id="about">About Us</a>
+    </div>
+
+    <a href="">
+      <%= image_tag("logo_3-removebg-preview.png",class: "logo" ) %>
+    </a>
+    <%= image_tag("magnifying-glass.png",class: "icon" ) %></a>
+      <% if @presence !=1 %>
+        <%= link_to "/users/new" , method: :get do %>
+          <div class="subscribe_button"></div>
+          <% end %>
+            <% elsif @presence==1 %>
+              <p class="user_firstname">
+                <%= @current_user.first_name%>
+              </p>
+              <% end %>
+  </div>
+
+<div>
+    <%= image_tag("about.png",class: "about" ) %>
+</div>
+
+

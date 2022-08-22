@@ -3,11 +3,13 @@
 Rails.application.routes.draw do
   get 'blogs/index'
   get '/home', to: 'home#index'
+  get '/aboutus', to: 'home#aboutus'
   resources :users
   resources :blogs
-  root 'home/index'
+  # root 'home/index'
   get '/blog/comment/:blog_id', to: 'comments#new_comment'
   post '/comment/create/:blog_id', to: 'comments#comment_create'
+  get '/comment/delete/:blog_id', to: 'comments#delete'
   post '/blogs/reaction/:blog_id', to: 'blogs#reaction'
   put '/blogs/reaction/:reaction_id', to: 'blogs#reaction_update'
   delete '/blogs/reaction/:reaction_id', to: 'blogs#reaction_delete'

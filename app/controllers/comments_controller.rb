@@ -22,9 +22,10 @@ class CommentsController < ApplicationController
     redirect_to request.referrer
   end
 
-  def destroy
-    comment = Comment.find(params[:id])
+  def delete
+    comment = Comment.find(params[:blog_id])
     comment.destroy
+    redirect_to request.referrer
   end
 
   private

@@ -17,7 +17,7 @@
         <a href="http://localhost:3000/home" id="home">Home</a>
         <a href="" id="achivements">News</a>
         <a href="/blogs" data-method="get" id="profile">Blogs</a>
-        <a href="" id="about">About Us</a>
+      <a href="/aboutus" id="about">About Us</a>
       </div>
 
       <a href="">
@@ -244,8 +244,9 @@
                           </p>
                           </div>
                         </div>
-                        <div>
-                          <%= image_tag "delete.png",class: "blog_delete_icon1" %>
+                        <div >
+                                <img src="<%= asset_path 'delete.png' %>" class="blog_delete_icon1"  onclick="deleteComment(<%= comment.id %>)">
+                            </a>
                          </div>
                         </div>
                        <% end %>
@@ -253,3 +254,11 @@
                      </div>
                    </div>
         </div>
+
+        <script>
+
+function deleteComment(comment_id) {
+    if(confirm('Are you sure ?')){
+                        location.href = '/comment/delete/'+comment_id;
+                    }}
+</script>

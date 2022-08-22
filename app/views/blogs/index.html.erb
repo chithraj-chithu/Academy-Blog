@@ -17,7 +17,7 @@
         <a href="http://localhost:3000/home" id="home">Home</a>
         <a href="" id="achivements">News</a>
         <a href="/blogs" data-method="get" id="profile">Blogs</a>
-        <a href="" id="about">About Us</a>
+        <a href="/aboutus" id="about">About Us</a>
       </div>
 
       <a href="">
@@ -60,14 +60,22 @@
     </div>
 
 <div class="blog_main">
-<div class="bolg_user_profile">
+  <div class="bolg_user_profile">
+    <div>
   <%= image_tag("blog_user.png",class: "blog_user_icon" ) %>
-  <p class="blog_user_name">
+</div>
+  <div class="blog-user-name-and-time">
+  <div class="blog_user_name">
+  <p>
     Shayam Anandhakumaran
   </p>
-  <p class="blog_user_posted">
+</div>
+<div class="blog_user_posted">
+  <p>
     Posted On : 2 Days Ago
   </p>
+  </div>
+</div>
 </div>
 <div class="blog_content">
  
@@ -148,7 +156,9 @@
 
         <!-- Delete blog -->
         <% if @presence == 1%>
-        <a href="/blogs/<%=blog.id%>" data-method="delete" class="delete_blog_button" %>Delete blog</a>
+        <div class="blog-delete-button-div">
+        <a href="/blogs/<%=blog.id%>" data-method="delete" class="delete_blog_button" %><%=image_submit_tag("delete.png",class: "delete_button_png")%></a>
+      </div>
         <% end %>
 
         <!-- Add reactions -->
