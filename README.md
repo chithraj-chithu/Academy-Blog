@@ -1,3 +1,11 @@
+# Links
+## Final Project Git Link - https://github.com/chith-raj/Academy-Blog
+## Final Project Heroku Link - https://fwsa-blog-chithraj.herokuapp.com/home 
+## 100 Days project Git Link - https://github.com/fwsa-batch2/chithraj.rajan__web_project
+## 100 Days project Netlifi Link - https://fwsa-batch2.github.io/chithraj.rajan__web_project/
+## Portfolio Link - https://stalwart-brigadeiros-46f30e.netlify.app/
+ 
+
 # Academy Blog
 
 ## What is Academy Blog?
@@ -53,4 +61,9 @@ User can add likes in blogs
 User can add dislikes in blogs
 
 ### 11. Contact Us
+
+# Gem Used
+
+## gem 'rubocop'
+## gem 'erb_lint'
 
