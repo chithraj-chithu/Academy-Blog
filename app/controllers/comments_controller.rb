@@ -1,27 +1,30 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
-  def create
-    current_user
-    user = User.find(current_user.id)
-    user_id = user.id
-    comment = Comment.new(comment: comment_params[:comment], user_id: user_id, blog_id: params[:blog_id])
-    comment.images.attach(comment_params[:images])
-    if comment.save
-      redirect_to blogs_path
-    else
-      render plain: 'Fail'
-    end
+  def new_comment
+    @comments = Comment.where(blog_id: params[:blog_id])
+    p '============================================'
+    p '============================================'
+    p '============================================'
+    p '============================================'
+    p @comments
+    render 'blogs/_show'
+  end
+
+  def comment_create
+    p '================================================'
+    p '================================================'
+    p '================================================'
+    p '================================================'
+    p params[:comment]
+    p params[:blog_id]
+    Comment.create!(user_id: @current_user.id, blog_id: params[:blog_id], comment: params[:comment])
+    redirect_to request.referrer
   end
 
   def destroy
     comment = Comment.find(params[:id])
-    comment.images.purge
-    if comment.destroy
-      redirect_to blogs_path
-    else
-      render plain: 'Fail'
-    end
+    comment.destroy
   end
 
   private

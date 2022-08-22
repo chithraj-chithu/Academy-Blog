@@ -1,31 +1,42 @@
-# README
+# Academy Blog
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## What is Academy Blog?
+It is a blog website for the Freshworks Software Academy.
 
-Things you may want to cover:
+## Why is Academy Blog?
+We can get updates from the academy. We'll be able to create our own blog and see,like, comment on others blogs too.
 
-* Ruby version
+## Why I chose this project?
+I wanted to make my project visible to all. Then I thought the next batch students will look through my website and get inspired by it. So I started doing this project for the academy.
 
-* System dependencies
+## Features
+### 1. Register
 
-* Configuration
+ As a user I should create an account to add blogs and likes also. Otherwise user can read that blogs.
 
-* Database creation
+### 2. Login
+Login with Mail Id and password to become a user
 
-* Database initialization
+### 3. Logout 
+Logout from that website. That user details are stored in database.
 
-* How to run the test suite
+### 4. Add blog
+If a user want to add and publish a blog, first that user must be logged in, otherwise,they can't add.So, your can enter their blog title and content,with a image.
 
-* Services (job queues, cache servers, search engines, etc.)
+### 5. Delete blog
+If a user wants to delete theirvblog. they can delete it also.
 
-* Deployment instructions
+### 6. Add comments
+User can add their comments in blogs
 
-* ...
-"# Academy-Blog" 
+### 7. Delete comments
+User can delete their comments in blogs
 
-#Dev
+### 9. Like
+User can add likes in blogs
 
-chithraj
+### 10. Dislike
+User can add dislikes in blogs
 
-rajan
+### 11. Contact Us
+

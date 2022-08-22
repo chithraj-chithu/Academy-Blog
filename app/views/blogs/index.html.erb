@@ -68,7 +68,6 @@
   <p class="blog_user_posted">
     Posted On : 2 Days Ago
   </p>
-
 </div>
 <div class="blog_content">
  
@@ -113,15 +112,22 @@
       <div class="blog_main1" style="margin-top: 30px;">
         <div class="bolg_user_profile">
           <% if User.find(blog.user_id).profile_picture.attached? %>
+          <div>
           <%= image_tag(User.find(blog.user_id).profile_picture,class: "blog_user_icon" ) %>
-            <p class="blog_user_name">
+        </div>
+        <div class="blog-user-name-and-time">
+        <div class="blog_user_name">
+            <p>
               <%= User.find(blog.user_id).first_name %>
             </p>
+            </div>
             <% end %>
-            <p class="blog_user_posted">
+            <div class="blog_user_posted">
+            <p>
               Posted On : <%= blog.created_at.strftime("%d-%m-%Y") %>
             </p>
-
+          </div>
+        </div>
         </div>
         <div class="blog_content">
 
@@ -152,7 +158,7 @@
              <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
               <input type="hidden" name="reaction" value="1">
               <!-- <%= form.submit "Like",class: "blog-submit-button"%> -->
-              <p class="blog_like_text_count1" style='cursor:pointer; color : <%= @reaction_boolean=="1" ? ' white' : ' white' %>'>Like
+                <p class="blog_like_text_count1" style='cursor:pointer; color : <%= @reaction_boolean=="1" ? ' white' : ' white' %>'>Like
               </p>
               <%=image_submit_tag("like.png",class: "blog-submit-button1")%>
               <% end %>
@@ -166,6 +172,13 @@
               <%=image_submit_tag("dislike1.png",class: "blog-submit-button2")%>
               <% end %>
           </div>
+          <a href="/blog/comment/<%= blog.id %>">
+            <% comment_count = Comment.where(blog_id: blog.id).length  %>
+              <div class="blog_content_comment">
+                  <%= image_tag("comment.png",class: "comment_icon" ) %>
+                  <p><%= comment_count %> comments</p>
+              </div>
+        </a>
         <% else %>
            <% @like = 0%>
            <% @dislike = 0%>
@@ -207,9 +220,10 @@
                 <%= form.submit "dislike",class: "blog-submit-button"%>
             </div>
         <% end %>
+        
         <% elsif @user_presence == 1 %>
         <% if @reaction_boolean == "0"%>
-            <div>
+                    <div>
                 <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "put") do|form| %>
                 <input type="hidden" name="reaction" value="1">
                     <p class="blog_like_text_count1" style='cursor:pointer; color : <%= @reaction_boolean=="1" ? ' white' : ' white' %>'>Like
@@ -232,7 +246,13 @@
             <div>
               <p class="dislike_count_numbers"><%=@dislike%></p>
             </div>
-            
+            <a href="/blog/comment/<%= blog.id %>">
+              <% comment_count = Comment.where(blog_id: blog.id).length  %>
+                <div class="blog_content_comment">
+                    <%= image_tag("comment.png",class: "comment_icon" ) %>
+                    <p><%= comment_count %> comments</p>
+                </div>
+          </a>
             <% elsif @reaction_boolean == "1"%>
             <div>
                 <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "delete") do|form| %>
@@ -253,7 +273,16 @@
                     <%=image_submit_tag("dislike1.png",class: "blog-submit-button2") %>
                 <% end %>
             </div>
-            <div class="dislike_count_numbers"> <%=@dislike%></div>
+            <div class="dislike_count_numbers"> <%=@dislike%></div> 
+            <a href="/blog/comment/<%= blog.id %>">
+              <% comment_count = Comment.where(blog_id: blog.id).length  %>
+                <div class="blog_content_comment">
+                    <%= image_tag("comment.png",class: "comment_icon" ) %>
+                    <p><%= comment_count %> comments</p>
+                </div>
+          </a>
+
+          
         <% end %>
       <% end %>
       

@@ -1,0 +1,255 @@
+<style>
+  body {
+    background-image: url(<%= asset_path('blogs_bg.png') %>);
+    /* background-attachment: fixed; */
+    background-size: 100%;
+    background-blend-mode: soft-light;
+    background-repeat: no-repeat;
+
+  }
+</style>
+
+
+<%= content_for :title, "Index" %>
+  <div id="first_main">
+    <div id="blog_header">
+      <div class="navbar">
+        <a href="http://localhost:3000/home" id="home">Home</a>
+        <a href="" id="achivements">News</a>
+        <a href="/blogs" data-method="get" id="profile">Blogs</a>
+        <a href="" id="about">About Us</a>
+      </div>
+
+      <a href="">
+        <%= image_tag("logo_3-removebg-preview.png",class: "logo" ) %>
+      </a>
+      <%= image_tag("magnifying-glass.png",class: "icon" ) %></a>
+        <% if @presence !=1 %>
+          <%= link_to "/users/new" , method: :get do %>
+            <div class="subscribe_button"></div>
+            <% end %>
+              <% elsif @presence==1 %>
+                <p class="user_firstname">
+                  <%= @current_user.first_name%>
+                </p>
+                <% end %>
+    </div>
+
+
+
+<div class="blog_second_main1">
+
+    <% blog = Blog.find(params[:blog_id].to_i) %>
+    <div
+        class="blog_titles"><!-- <p class="blog_titles1">thoughts to words</p>
+                    <p class="blogs_title2">Blogs</p> -->
+    </div>
+
+    <div class="blog_main1" style="margin-top: 30px;">
+        <div class="bolg_user_profile">
+            <% if User.find(blog.user_id).profile_picture.attached? %>
+            <div>
+                <%= image_tag(User.find(blog.user_id).profile_picture,class: "blog_user_icon" ) %>
+              </div>
+              <div class="blog-user-name-and-time">
+                <div class="blog_user_name">
+                <p class=>
+                    <%= User.find(blog.user_id).first_name %>
+                </p>
+                </div>
+            <% end %>
+            <div class="blog_user_posted">
+            <p>
+                Posted On :
+                <%= blog.created_at.strftime("%d-%m-%Y") %>
+            </p>
+          </div>
+          </div>
+        </div>
+        <div class="blog_content">
+
+            <div class="blog_content_div">
+                <p class="blog_content_title">
+                    <%= blog.title %>
+                </p>
+                <p class="blog_content_para">
+                    <%= blog.blog %>
+                </p>
+            </div>
+            <% if blog.images.attached? %>
+                <div class="blog_content_image_div">
+                    <%= image_tag(blog.images.first)%>
+                </div>
+            <% end %>
+        </div>
+
+        <!-- Delete blog -->
+        <% if @presence == 1%>
+            <a href="/blogs/<%=blog.id%>" data-method="delete" class="delete_blog_button" %>Delete blog</a>
+        <% end %>
+
+        <!-- Add reactions -->
+        <% @blog_reaction_value = BlogReaction.where(blog_id: blog.id)%>
+        <% if @blog_reaction_value == []%>
+            <div>
+                <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
+                <input
+                    type="hidden" name="reaction" value="1">
+                    <!-- <%= form.submit "Like",class: "blog-submit-button"%> -->
+                    <p class="blog_like_text_count1" style='cursor:pointer; color : <%= @reaction_boolean=="1" ? ' white' : ' white' %>'>Like
+                    </p>
+                    <%=image_submit_tag("like.png",class: "blog-submit-button1")%>
+                <% end %>
+            </div>
+            <div>
+                <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
+                <input
+                    type="hidden" name="reaction" value="0">
+                    <!-- <%= form.submit "DisLike",class: "blog-submit-button"%> -->
+                    <p class="blog_dislike_text_count1" style='cursor: pointer; color : <%= @reaction_boolean=="0" ? ' white;' : ' white;' %>'>Dislike
+                    </p>
+                    <%=image_submit_tag("dislike1.png",class: "blog-submit-button2")%>
+                <% end %>
+            </div>
+            <div class="blog_content_comment">
+                <% comment_count = Comment.where(blog_id: blog.id).length  %>
+                <%= image_tag("comment.png",class: "comment_icon" ) %>
+                <p><%= comment_count %>
+                    comments</p>
+            </div>
+        <% else %>
+            <% @like = 0%>
+            <% @dislike = 0%>
+            <% @user_presence = 0%>
+            <% @reaction_boolean = nil %>
+
+
+            <% @blog_reaction_value.each do |reaction| %>
+                <% if reaction.reaction == "1"%>
+                    <% @like = @like + 1%>
+                    <% elsif reaction.reaction == "0"%>
+                    <% @dislike = @dislike + 1%>
+                <% end %>
+            <% end %>
+
+
+            <% @blog_reaction_value.each do |reaction| %>
+                <% if reaction.user_id == @current_user.id%>
+                    <%@user_presence = 1%>
+                    <%@reaction_boolean =reaction.reaction %>
+                    <% @reaction_value = reaction.id %>
+                    <% break %>
+                <% else%>
+                    <%@user_presence = 0%>
+                <% end %>
+            <% end %>
+        <% end %>
+
+        <% if @user_presence == 0 %>
+            <div>
+                <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
+                <input type="hidden" name="reaction" value="1">
+                    <%= form.submit "Like",class: "blog-submit-button"%>
+                </div>
+            <% end %>
+            <div>
+                <%= form_with(url: "/blogs/reaction/#{blog.id}", method: "post") do|form| %>
+                <input type="hidden" name="reaction" value="0">
+                    <%= form.submit "dislike",class: "blog-submit-button"%>
+                </div>
+            <% end %>
+            <% elsif @user_presence == 1 %>
+            <% if @reaction_boolean == "0"%>
+                <div>
+                    <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "put") do|form| %>
+                    <input type="hidden" name="reaction" value="1">
+                        <p class="blog_like_text_count1" style='cursor:pointer; color : <%= @reaction_boolean=="1" ? ' white' : ' white' %>'>Like
+                        </p>
+                        <%=image_submit_tag("like.png",class: "blog-submit-button1")%>
+                    <% end %>
+                    <%=@like%>
+                </div>
+                <div>
+                    <p class="like_count_numbers"><%=@like%></p>
+                </div>
+                <div>
+                    <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "delete") do|form| %>
+                    <input type="hidden" name="reaction" value="0">
+                        <p class="blog_dislike_text_count1" style='cursor: pointer; color : <%= @reaction_boolean=="0" ? ' white;' : ' white;' %>'>Dislike
+                        </p>
+                        <%=image_submit_tag("dislike1.png",class: "blog-submit-button2")%>
+                    <% end %>
+                </div>
+                <div>
+                    <p class="dislike_count_numbers"><%=@dislike%></p>
+                </div>
+
+                <% elsif @reaction_boolean == "1"%>
+                <div>
+                    <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "delete") do|form| %>
+                    <input type="hidden" name="reaction" value="1">
+                        <p class="blog_like_text_count1" style='cursor:pointer; color : <%= @reaction_boolean=="1" ? ' white;' : ' white;' %>'>Like
+                        </p>
+                        <%=image_submit_tag("like.png",class: "blog-submit-button1")%>
+
+                    <% end %>
+                </div>
+                <div class="like_count_numbers">
+                    <%=@like%></div>
+
+                <div>
+                    <%= form_with(url: "/blogs/reaction/#{@reaction_value}", method: "put") do|form| %>
+                    <input type="hidden" name="reaction" value="0">
+                        <p class="blog_dislike_text_count1" style='cursor: pointer; color : <%= @reaction_boolean=="0" ? ' blue;' : ' white;' %>'>Dislike
+                        </p>
+                        <%=image_submit_tag("dislike1.png",class: "blog-submit-button2") %>
+                    <% end %>
+                </div>
+                <div class="dislike_count_numbers">
+                    <%=@dislike%></div>
+            <% end %>
+        <% end %>
+            </div>
+
+            <div class="add_blog_form">
+              <%# form for comment %>
+              <h2 class="heading-field">Add your Comment here...</h2>
+              <div class="add_blog_form_div">
+               <%= form_with url: "/comment/create/#{blog.id}" do |f| %>
+                <div class="input_field_div11">
+                   <input placeholder="Comments" type="text" maxlength="300" name="comment" class="valid">
+                  </div>
+                   <div class="input_field_div2">
+                   <input type="submit" value="Comment" class="blog-submit-button">
+                   </div>
+               <% end %>
+   
+                     <%# Displaying comments %>
+                     <div class="show-comment-whole-div">
+                       <% @comments.each do |comment| %>
+                       <div class="show-comment-main-div">
+                           <% user = User.find(comment.user_id) %>
+                           <div>
+                           <%= image_tag user.profile_picture,class: "blog_user_icon1" %>
+                          </div>
+                          <div class="blog-user-name-comment">
+                          <div  class="blog_user_name1">
+                            <p>
+                           <%= user.first_name %>
+                          </p>
+                          </div>
+                          <div class="blog_user_name2">
+                            <p>
+                           <%= comment.comment %>
+                          </p>
+                          </div>
+                        </div>
+                        <div>
+                          <%= image_tag "delete.png",class: "blog_delete_icon1" %>
+                         </div>
+                        </div>
+                       <% end %>
+                      </div>
+                     </div>
+                   </div>
+        </div>
