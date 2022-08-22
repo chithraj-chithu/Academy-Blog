@@ -13,6 +13,8 @@ I wanted to make my project visible to all. Then I thought the next batch studen
 ### 1. Register
 
  As a user I should create an account to add blogs and likes also. Otherwise user can read that blogs.
+Create a account to add blogs and likes also. Otherwise user can read that blogs.
+
 
 ### 2. Login
 Login with Mail Id and password to become a user
@@ -28,6 +30,18 @@ If a user wants to delete theirvblog. they can delete it also.
 
 ### 6. Add comments
 User can add their comments in blogs
+
+### 7. Delete comments
+User can delete their comments in blogs
+
+### 9. Like
+User can add likes in blogs
+
+### 10. Dislike
+User can add dislikes in blogs
+
+### 11. Contact Us
+
 
 ### 7. Delete comments
 User can delete their comments in blogs
