@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   skip_before_action :ensure_user_logged_in
 
-  def new
-  end
+  def new; end
 
   def index
     @user = User.all
@@ -12,10 +13,10 @@ class UsersController < ApplicationController
     user = User.new(user_params)
     user.profile_picture.attach(user_params[:profile_picture])
     if user.save
-      redirect_to "/signin"
+      redirect_to '/signin'
     else
       flash[:error] = user.errors.full_messages.first
-      redirect_to "/users/new"
+      redirect_to '/users/new'
     end
   end
 

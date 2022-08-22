@@ -1,94 +1,269 @@
 <style>
-body {
-    background-image: url(<%= asset_path('bg.png') %>);
-    /* background-attachment: fixed; */
-    background-size: 100%;
-    background-blend-mode: soft-light;
-    background-repeat: no-repeat;
-}
+    body {
+        background-image: url(<%= asset_path('bg.png') %>);
+        /* background-attachment: fixed; */
+        background-size: 100%;
+        background-blend-mode: soft-light;
+        background-repeat: no-repeat;
+    }
 </style>
 <%= content_for :title, "Index" %>
-<div id="first_main">
-    <div id="header">
-        <div class="navbar">
-            <a href="" id="home">Home</a>
-            <a href="" id="achivements">News</a>
-            <a href="/blogs" data-method="get" id="profile">Blogs</a>
-            <a href="" id="about">About Us</a>
-        </div>
-
-        <a href="">
-            <%= image_tag("logo_3-removebg-preview.png",id: "logo") %></a>
-        <%= image_tag("magnifying-glass.png",id: "icon") %></a>
-    <%= link_to "/users/new", method: :get do %>
-        <div id="subscribe_button"></div>
-    <% end %>
-</div>
-<p id="title1">WELCOME AND</p>
-<p id="title2">KNOW ABOUT FWSA</p>
-<p class="content1">This is your space where you can learn about FWSA</p>
-<p class="content2">get regular updates about the academy and its activities</p>
-<p class="content3">can also contribute or be a part of the community</p>
-
-<button class="more">More About Us</button>
-
-<div id="icons">
-    <%= image_tag("instagram.png",class: "insta") %></a>
-<%= image_tag("facebook.png",class: "fb") %></a><%= image_tag("twitter.png",class: "twit") %></a></div><div class="first_line"></div><div class="second_line"></div><div class="third_line"></div></div><div id="second_main"><div id="news_title"><p class="updates_title1">BREAKING NEWS</p><p class="updates_title2">LATEST UPDATES</p></div><div class="carousel"><% if @updates != nil%><% @updates.each do |update| %>
-<% @count+= 1 %>
-<a class="carousel-item" href="#six!">
-    <div class="carousal1" id="carousal">
-        <% @updated_user = User.find(update.user_id)%>
-        <p class="Author"><%= @updated_user.first_name %></p>
-        <p class="Update"><%= update.updates %></p>
-        <%= image_tag("—Pngtree—painted graffiti quotation marks ted_5054044.png",class: "quote1", id: "quote") %>
-        <p class="Date"><%= @updated_user.created_at.strftime("Date: %F , Time: %T") %></p>
-        <%= image_tag(@updated_user.profile_picture,class: "profile_pic") %>
-    </div>
-</a><% end %><% end %></div><% if @presence == 1 %><%= image_tag("plus.png",class: "plus_icon",onclick: "showHideForm('show#{@count}')") %><% end %><% if @presence == 0 %><%= image_tag("plus.png",class: "plus_icon",onclick: "window.location.href='/signin'") %><% end %></div><div id="third_part"></div><% if @presence == 1%><div id="show<%= @count %>" style="display: none;"><div style="background-color: blue;"><p class="Author"><%= @user.first_name%></p><div style="background-color: blue;">
-<form action="/updates/new" method="post">
-    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
-        <input placeholder="Type your update" type="text" class="signin_email" id="email" name="updates">
-            <br>
-                <button type="submit" class="">Sign in</button>
-            </form>
-        </div>
-        <%= image_tag("—Pngtree—painted graffiti quotation marks ted_5054044.png",class: "", id: "") %>
-
-        <%= image_tag(@user.profile_picture,class: "") %>
-
-    </div>
-</div><% end %><script>
-function showHideForm(div_id) {
-    let div = document.getElementById(div_id)
-    console.log(div.style.display)
-    if (div.style.display == "none") {
-        console.log(div)
-        div.style.display = "block"
-    } else if (div.style.display == "block") {
-        console.log(div)
-        div.style.display = "none"
-    }
-
-
-}</script><!-- <div class="search">
-            <div class="search_icon"></div>
-    
-            <div class="search_input">
-                <input type="text" placeholder="Search" id="search_input">
+    <div id="first_main">
+        <div id="header">
+            <div class="navbar">
+                <a href="" id="home">Home</a>
+                <a href="" id="achivements">News</a>
+                <a href="/blogs" data-method="get" id="profile">Blogs</a>
+                <a href="" id="about">About Us</a>
             </div>
-    
-            <span class="clear" onclick="document.getElementById('search_input').value = '' ">
-    
-            </span>
-        </div> --><!-- <script>
-            const search_icon = document.querySelector('.search_icon');
-            const search = document.querySelector('.search')
-            search_icon.onclick = function(){
-                search.classList.toggle('active')
-            }
-       </script> --><script>
-$(document).ready(function () {
-    $('.carousel').carousel();
 
-});</script></body></html>
+            <a href="">
+                <%= image_tag("logo_3-removebg-preview.png",class: "logo" ) %>
+            </a>
+            <%= image_tag("magnifying-glass.png",class: "icon" ) %></a>
+                <% if @presence != 1 %>
+                <%= link_to "/users/new" , method: :get do %>
+                    <div class="subscribe_button"></div>
+                    <% end %>
+                    <% elsif @presence == 1 %>
+                        <p class="user_firstname">
+                            <%= @user.first_name%>
+                        </p>
+                    <% end %>
+        </div>
+        <%# <input type="text" class="search_input"> %>
+        <p id="title1">WELCOME AND</p>
+        <p id="title2">KNOW ABOUT FWSA</p>
+        <p class="content1">This is your space where you can learn about FWSA</p>
+        <p class="content2">get regular updates about the academy and its activities</p>
+        <p class="content3">can also contribute or be a part of the community</p>
+
+        <button class="more">More About Us</button>
+
+        <div id="icons">
+            <%= image_tag("instagram.png",class: "insta" ) %></a>
+                <%= image_tag("facebook.png",class: "fb" ) %></a>
+                    <%= image_tag("twitter.png",class: "twit" ) %></a>
+        </div>
+        <div class="first_line"></div>
+        <div class="second_line"></div>
+        <div class="third_line"></div>
+    </div>
+    <div class="fwsa_blog">
+        <div id="news_title">
+            <p class="updates_title1">WHAT IS FWSA</p>
+            <p class="updates_title2">FWSA</p>
+        </div>
+        <div class="what_is_fwsa">
+            <div class="what_is_fwsa_container">
+                <div class="what_is_fwsa_title">
+                    <p class="what_is_fwsa_title_question">WHAT IS FWSA ?</p>
+
+                    <p class="what_is_fwsa_line1">
+                        Freshworks Software Academy (FWSA) is a social impact (CSR - Corporate Social Responsibility)
+                        initiative powered by Freshworks
+                        <br>
+                        India Private limited (popularly known as Freshworks) for
+                        students
+                        <br>
+                        from low income families who are unable to afford conventional
+                        <br>
+                        college
+                        education but have the right motivation, aptitude to
+                        <br>
+                        learn software skills & have a strong
+                        desire to start their career in technology.
+                    </p>
+
+                    <button class="button-86" role="button">
+                        <a href="https://www.freshworks.com/company/philanthropy/about/">Read More</a>
+                    </button>
+
+                </div>
+
+                <div class="what_is_fwsa_video">
+
+                    <iframe src="https://www.youtube.com/embed/QXCsKdFX67Y" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fwsa_blog1">
+        <div id="news_title">
+            <p class="updates_title1">FWSA FOR</p>
+            <p class="updates_title2">FOR WHO ?</p>
+        </div>
+
+        <div class="for_who_fwsa">
+            <div class="for_who_fwsa_container">
+                <div class="for_who_fwsa_title">
+                    <p class="for_who_fwsa_title_question">Who is FWSA for?</p>
+
+                    <p class="for_who_fwsa_line1">
+                        Freshworks Software Academy (FWSA) is a programme exclusively designed for aspirants of a career
+                        in technology, who do not have the means to afford formal education after high school
+                    </p>
+
+                    <button class="button-readmore" role="button">
+                        <a href="https://www.freshworks.com/company/philanthropy/software-academy/">Read More</a>
+                    </button>
+
+                </div>
+
+                <div class="for_who_fwsa_video">
+
+                    <iframe src="https://www.youtube.com/embed/7l0EZPXeKdQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="fwsa_blog2">
+        <div id="news_title">
+            <p class="updates_title1">TIMELINE</p>
+            <p class="updates_title22">OUR JOURNEY</p>
+        </div>
+
+        <div class="journey1">
+            
+                <div class="journey1_circle1">
+                    <%= image_tag("fwsa.png",class: "insta_images" ) %>
+                </div>
+                <p class="journey1_text1">Our First Milestone
+                    <br>
+                    FWSA Started (2019)
+                </p>
+                <div class="journey1_circle2">
+                    <%= image_tag("fwsa1.png",class: "insta_images" ) %>
+                </div>
+                <p class="journey1_text2">Our Batch 1
+                    <br>
+                    (2019)
+                </p>
+                <div class="journey1_circle3">
+                    <%= image_tag("fwsa2.jpg",class: "insta_images" ) %>
+                </div>
+                <p class="journey1_text3">Our Batch 2
+                    <br>
+                    (2021)
+                </p>
+                <div class="journey1_circle4">
+                    <%= image_tag("soon.jpg",class: "insta_images" ) %>
+                </div>
+                <p class="journey1_text4">
+                    Our batch 3
+                    <br>
+                    Will start in (2022)
+                </p>
+                <div class="rectangle"></div>
+                <div class="rectangle1"></div>
+                <div class="rectangle2"></div>
+
+        </div>
+        <div class="space">
+      
+        </div>
+        <div class="footer">
+            <a href="">
+                <%= image_tag("logo_3-removebg-preview.png",class: "logo_footer" ) %>
+            </a>
+
+            <p class="footer_text">
+                are you a blogger ? Then <div class="subscribe_button1"></div>
+            </p>
+
+            <a href="https://www.facebook.com/custservacademy/">
+                <%= image_tag("f.png",class: "flogo_footer" ) %>
+            </a>
+            <a href="https://instagram.com/freshworkssoftwareacademy?igshid=YmMyMTA2M2Y=">
+                <%= image_tag("i.png",class: "i_logo_footer" ) %>
+            </a>
+            <a href="https://www.freshworks.com/company/philanthropy/software-academy/">
+                <%= image_tag("google.png",class: "google_logo_footer" ) %>
+            </a>
+            <a href="https://www.youtube.com/c/FreshworksCSRIndia">
+                <%= image_tag("y.png",class: "y_logo_footer" ) %>
+            </a>
+        </div>
+
+        <!-- <div id="second_main"><div id="news_title"><p class="updates_title1">BREAKING NEWS</p><p class="updates_title2">LATEST UPDATES</p></div><div class="carousel"><% if @updates != nil%><% @updates.each do |update| %>
+                    <% @count+= 1 %>
+                    <a class="carousel-item" href="#six!">
+                        <div class="carousal1" id="carousal">
+                            <% @updated_user = User.find(update.user_id)%>
+                            <p class="Author"><%= @updated_user.first_name %></p>
+                            <p class="Update"><%= update.updates %></p>
+                            <%= image_tag("—Pngtree—painted graffiti quotation marks ted_5054044.png",class: "quote1", id: "quote") %>
+                            <p class="Date"><%= @updated_user.created_at.strftime("Date: %F , Time: %T") %></p>
+                            
+                            <%= image_tag(@updated_user.profile_picture,class: "profile_pic") %>
+                        </div>
+                    </a><% end %><% end %></div><% if @presence == 1 %><%= image_tag("plus.png",class: "plus_icon",onclick: "showHideForm('show#{@count}')") %><% end %><% if @presence == 0 %><%= image_tag("plus.png",class: "plus_icon",onclick: "window.location.href='/signin'") %><% end %></div><div id="third_part"></div><% if @presence == 1%><div id="show<%= @count %>" style="display: none;"><div style="background-color: blue;"><p class="Author"><%= @user.first_name%></p><div style="background-color: blue;">
+                    <form action="/updates/new" method="post">
+                        <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+                            <input placeholder="Type your update" type="text" class="signin_email" id="email" name="updates">
+                                <br>
+                                    <button type="submit" class="">Sign in</button>
+                                </form>
+                            </div>
+                            <%= image_tag("—Pngtree—painted graffiti quotation marks ted_5054044.png",class: "", id: "") %>
+                            <% if @user.profile_picture.attached? %>
+                            <%= image_tag(@user.profile_picture,class: "") %>
+                            <% end %>
+                    
+                        </div> -->
+    </div>
+       
+    <!-- <div class="space_adder"></div> -->
+ 
+  
+  
+    <% end %>
+        <script>
+            function showHideForm(div_id) {
+                let div = document.getElementById(div_id)
+                console.log(div.style.display)
+                if (div.style.display == "none") {
+                    console.log(div)
+                    div.style.display = "block"
+                } else if (div.style.display == "block") {
+                    console.log(div)
+                    div.style.display = "none"
+                }
+
+
+            }
+        </script>
+        <!-- <div class="search">
+                                <div class="search_icon"></div>
+                        
+                                <div class="search_input">
+                                    <input type="text" placeholder="Search" id="search_input">
+                                </div>
+                        
+                                <span class="clear" onclick="document.getElementById('search_input').value = '' ">
+                        
+                                </span>
+                            </div> -->
+        <!-- <script>
+                                const search_icon = document.querySelector('.search_icon');
+                                const search = document.querySelector('.search')
+                                search_icon.onclick = function(){
+                                    search.classList.toggle('active')
+                                }
+                           </script> -->
+        <script>
+            $(document).ready(function () {
+                $('.carousel').carousel();
+
+            });
+        </script>
+        </body>
+
+        </html>
