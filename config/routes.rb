@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/home', to: 'home#index'
   resources :users
   resources :blogs
+  root 'home/index'
   get '/blog/comment/:blog_id', to: 'comments#new_comment'
   post '/comment/create/:blog_id', to: 'comments#comment_create'
   post '/blogs/reaction/:blog_id', to: 'blogs#reaction'
